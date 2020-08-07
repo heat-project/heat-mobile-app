@@ -1,1 +1,1 @@
-# INTEC-app
+# HEAT-app
