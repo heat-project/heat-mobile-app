@@ -1,1 +1,1 @@
-# HEAT-app
+# heat-mobile-app
