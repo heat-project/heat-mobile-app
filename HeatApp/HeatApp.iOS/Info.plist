@@ -38,5 +38,7 @@
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>HeatApp</string>
+	<key>XSAppIconAssets</key>
+	<string>Assets.xcassets/AppIcon.appiconset</string>
 </dict>
 </plist>
