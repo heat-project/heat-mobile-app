@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Text;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace HeatApp.ViewModels
@@ -15,6 +16,18 @@ namespace HeatApp.ViewModels
     [DataContract]
     public class BaseViewModel : INotifyPropertyChanged
     {
+        #region Variables
+        public INavigation navigation;
+        #endregion
+
+        #region Constructors
+        public BaseViewModel() { }
+        public BaseViewModel(INavigation navigation)
+        {
+            this.navigation = navigation;
+        }
+        #endregion
+
         #region Event handler
 
         /// <summary>

@@ -1,5 +1,6 @@
 using HeatApp.Views.Dashboard;
 using HeatApp.Views.Forms;
+using HeatApp.Views.HeatViews.Common;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,9 +13,9 @@ namespace HeatApp
         public App()
         {
             InitializeComponent();
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTQxOTY0QDMxMzcyZTMyMmUzMEtFZTVmbkM5UHYyTmpCMTMyaGNyUlMvQ2l2cFlLbkowOW9EQk42WXBZa0U9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzE4NzkyQDMxMzgyZTMyMmUzMEpENWQ0ZXM5WXpWc2hyNW1xNXI0OUYveU9Fd3VWS21KQ0xqZHZBdnRiNWc9");
 
-            MainPage = new NavigationPage(new HealthCarePage());
+            MainPage = new NavigationPage(new InitialPage());
         }
 
         protected override void OnStart()

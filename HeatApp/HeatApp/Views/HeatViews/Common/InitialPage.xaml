@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" xmlns:control="clr-namespace:HeatApp.Controls" xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" xmlns:local="clr-namespace:HeatApp.Views.Forms" xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
+             x:Class="HeatApp.Views.HeatViews.Common.InitialPage"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False">
+
+    <ScrollView HorizontalOptions="Center">
+        <ScrollView.VerticalOptions>
+            <OnIdiom
+                    x:TypeArguments="LayoutOptions"
+                    Default="CenterAndExpand"
+                    Phone="FillAndExpand" />
+        </ScrollView.VerticalOptions>
+
+        <StackLayout Margin="{core:OnPlatformOrientationThickness PhonePortrait='20,32',
+                                                                  PhoneLandscape='150,32',
+                                                                  TabletPortrait='200,50',
+                                                                  TabletLandscape='300,50',
+                                                                  Desktop='30'}"
+                Spacing="0"
+                VerticalOptions="FillAndExpand"
+                WidthRequest="{OnPlatform Default='-1',
+                                          UWP='350'}">
+
+            <Grid RowSpacing="0" 
+                  VerticalOptions="StartAndExpand">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <ff:CachedImage Grid.Row="0"
+                                Margin="20"
+                                Source= "logo_transparent.png"
+                                WidthRequest="150"
+                                HeightRequest="150"/>
+
+                <Label Grid.Row="1"
+                       Margin="10,40"
+                       FontFamily="{StaticResource Montserrat-SemiBold}"
+                       FontSize="26"
+                       HorizontalTextAlignment="Center"
+                       Style="{StaticResource LabelStyle}"
+                       Text="Su compañero de viaje en la ciudad en tiempo real"
+                       LineBreakMode="WordWrap"
+                       TextColor="{DynamicResource Gray-700}" />
+
+                <StackLayout VerticalOptions="EndAndExpand" Grid.Row="2" Spacing="0">
+                    <buttons:SfButton
+                        Margin="0,16"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Text="INICIAR SESIÓN"
+                        Command="{Binding GoToLoginCommand}"
+                        HorizontalOptions="FillAndExpand"/>
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center" Margin="20,0">
+                        <BoxView VerticalOptions="CenterAndExpand"
+                                 HorizontalOptions="FillAndExpand"
+                                 WidthRequest="50"
+                                 HeightRequest="1" 
+                                 Color="{DynamicResource Gray-700}"/>
+                        
+                        <Label FontFamily="{StaticResource Montserrat-Medium}"
+                               HorizontalTextAlignment="Center"
+                               Style="{StaticResource LabelStyle}"
+                               Text="O"
+                               TextColor="{DynamicResource Gray-700}" />
+                        
+                        <BoxView VerticalOptions="CenterAndExpand"
+                                 HorizontalOptions="FillAndExpand"
+                                 WidthRequest="50"
+                                 HeightRequest="1" 
+                                 Color="{DynamicResource Gray-700}"/>
+                    </StackLayout>
+
+
+                    <buttons:SfButton
+                        Margin="0,16"
+                        Style="{StaticResource PrimaryOutlineButtonStyle}"
+                        Text="REGISTRARSE"
+                        HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

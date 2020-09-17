@@ -16,5 +16,10 @@ namespace HeatApp.Views.HeatViews
         {
             InitializeComponent();
         }
+
+        private async void SfButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
     }
 }
