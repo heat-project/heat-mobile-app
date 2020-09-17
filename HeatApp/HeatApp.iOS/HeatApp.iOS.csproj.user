@@ -3,5 +3,6 @@
   <PropertyGroup>
     <SelectedDevice>iPhone 11 iOS 13.4</SelectedDevice>
     <DefaultDevice>iPhone 11 iOS 13.4</DefaultDevice>
+    <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>
 </Project>
