@@ -63,13 +63,13 @@
                                  WidthRequest="50"
                                  HeightRequest="1" 
                                  Color="{DynamicResource Gray-700}"/>
-                        
+
                         <Label FontFamily="{StaticResource Montserrat-Medium}"
                                HorizontalTextAlignment="Center"
                                Style="{StaticResource LabelStyle}"
                                Text="O"
                                TextColor="{DynamicResource Gray-700}" />
-                        
+
                         <BoxView VerticalOptions="CenterAndExpand"
                                  HorizontalOptions="FillAndExpand"
                                  WidthRequest="50"
@@ -77,11 +77,11 @@
                                  Color="{DynamicResource Gray-700}"/>
                     </StackLayout>
 
-
                     <buttons:SfButton
                         Margin="0,16"
                         Style="{StaticResource PrimaryOutlineButtonStyle}"
                         Text="REGISTRARSE"
+                        Command="{Binding GoToSignUpCommand}"
                         HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
             </Grid>

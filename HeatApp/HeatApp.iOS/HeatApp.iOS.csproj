@@ -229,4 +229,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\logo_transparent.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_transparent.png" />
+  </ItemGroup>
 </Project>
