@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace HeatApp.Views.HeatViews
+namespace HeatApp.Views.HeatViews.Common
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class SignUpPage : ContentPage
     {
-        public LoginPage()
+        public SignUpPage()
         {
             InitializeComponent();
         }
