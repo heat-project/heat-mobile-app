@@ -1,4 +1,18 @@
-﻿using System;
+using Syncfusion.SfChart.XForms.iOS.Renderers;
+using Syncfusion.XForms.iOS.ProgressBar;
+using Syncfusion.SfMaps.XForms.iOS;
+using Syncfusion.SfRotator.XForms.iOS;
+using Syncfusion.XForms.iOS.Graphics;
+using Syncfusion.XForms.iOS.TabView;
+using Syncfusion.XForms.iOS.Cards;
+using Syncfusion.SfRating.XForms.iOS;
+using Syncfusion.XForms.iOS.Core;
+using Syncfusion.ListView.XForms.iOS;
+using Syncfusion.SfCalendar.XForms.iOS;
+using Syncfusion.XForms.iOS.ComboBox;
+using Syncfusion.XForms.iOS.Border;
+using Syncfusion.XForms.iOS.Buttons;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,6 +37,20 @@ namespace HeatApp.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            SfChartRenderer.Init();
+            SfLinearProgressBarRenderer.Init();
+            SfMapsRenderer.Init();
+            SfRotatorRenderer.Init();
+            SfGradientViewRenderer.Init();
+            SfTabViewRenderer.Init();
+            SfCardViewRenderer.Init();
+            SfRatingRenderer.Init();
+            Core.Init();
+            SfListViewRenderer.Init();
+            SfComboBoxRenderer.Init();
+            SfCalendarRenderer.Init();
+            SfBorderRenderer.Init();
+            SfButtonRenderer.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
