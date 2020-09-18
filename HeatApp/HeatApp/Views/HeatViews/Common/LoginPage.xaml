@@ -125,7 +125,8 @@
                         Margin="0,16"
                         Style="{StaticResource PrimaryButtonStyle}"
                         Text="INICIAR SESIÓN"
-                        HorizontalOptions="FillAndExpand">
+                        HorizontalOptions="FillAndExpand"
+                        Clicked="Login_Clicked">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal">

@@ -40,5 +40,11 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+  <key>NSLocationAlwaysUsageDescription</key>
+  <string>Podemos utilizar su ubicación?</string>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>Podemos utilizar su ubicación mientras utilice la aplicación?</string>
+  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <string>Podemos utilizar su ubicación?</string>
 </dict>
 </plist>
