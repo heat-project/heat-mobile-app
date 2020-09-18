@@ -77,6 +77,7 @@
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Forms" Version="4.6.0.1141" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+    <PackageReference Include="Xamarin.Forms.Maps" Version="4.6.0.1141" />
   </ItemGroup>
 
   <ItemGroup>
@@ -200,7 +201,16 @@
     <EmbeddedResource Update="Views\HeatViews\Common\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\HeatViews\Common\MainMapPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\HeatViews\Common\RootPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\HeatViews\Common\SignUpPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\HeatViews\Menu\MenuPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Navigation\NavigationListCardPage.xaml">
@@ -285,6 +295,5 @@
 
   <ItemGroup>
     <Folder Include="ViewModels\HeatViewModels\Menu\" />
-    <Folder Include="Views\HeatViews\Menu\" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HeatApp.Views.HeatViews.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,11 @@ namespace HeatApp.Views.HeatViews
         private async void SfButton_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
+        }
+
+        private void Login_Clicked(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new RootPage();
         }
     }
 }

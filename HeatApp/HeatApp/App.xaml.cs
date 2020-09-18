@@ -1,6 +1,8 @@
 using HeatApp.Views.Dashboard;
 using HeatApp.Views.Forms;
+using HeatApp.Views.HeatViews;
 using HeatApp.Views.HeatViews.Common;
+using HeatApp.Views.Navigation;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

@@ -52,6 +52,8 @@ namespace HeatApp.iOS
             SfBorderRenderer.Init();
             SfButtonRenderer.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+            Xamarin.FormsMaps.Init();
+            //Xamarin.FormsGoogleMaps.Init("AIzaSyD2ZjqBONONbEATiZT8yX97iwm2biuJI5o");
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
