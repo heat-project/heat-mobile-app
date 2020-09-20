@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms" 
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
+             xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms" 
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             x:Class="HeatApp.Views.HeatViews.LoginPage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+
+        <ScrollView Grid.Row="0">
+
+            <StackLayout Margin="{core:OnPlatformOrientationThickness PhonePortrait='20,32',
+                                                                  PhoneLandscape='150,32',
+                                                                  TabletPortrait='200,50',
+                                                                  TabletLandscape='300,50',
+                                                                  Desktop='30'}"
+                    Spacing="0"
+                    VerticalOptions="FillAndExpand"
+                    WidthRequest="{OnPlatform Default='-1',
+                                              UWP='350'}">
+
+                <Grid RowSpacing="0" 
+                  VerticalOptions="StartAndExpand"
+                  Margin="0,10">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <ff:CachedImage Grid.Row="0"
+                                Margin="20"
+                                Source= "logo_transparent.png"
+                                WidthRequest="180"
+                                HeightRequest="180"/>
+
+                    <Label Grid.Row="1"
+                       Margin="0,10"
+                       TextColor="{StaticResource PrimaryColor}"
+                       FontFamily="{StaticResource Montserrat-Bold}"
+                       Style="{StaticResource LabelStyle}"
+                       FontSize="50"
+                       HorizontalTextAlignment="Start"
+                       Text="Iniciar Sesión"
+                       LineBreakMode="WordWrap" />
+
+                    <StackLayout Grid.Row="2" 
+                             Spacing="0" 
+                             Margin="10">
+
+                        <border:SfBorder 
+                            BorderWidth="0" 
+                            HasShadow="True"
+                            ShadowColor="{DynamicResource Gray-600}">
+
+                            <inputLayout:SfTextInputLayout                          
+                            LeadingViewPosition="Inside"
+                            ContainerType="Outlined"
+                            ContainerBackgroundColor="White"
+                            UnfocusedColor="{DynamicResource PrimaryColor}"
+                            FocusedColor="{StaticResource SecondaryColor}"
+                            OutlineCornerRadius="5">
+
+                                <Entry Placeholder="Usuario"/>
+
+                                <inputLayout:SfTextInputLayout.LeadingView>
+                                    <Label FontFamily="{StaticResource FontIcons}" Text="{StaticResource AvatarIcon}"/>
+                                </inputLayout:SfTextInputLayout.LeadingView>
+                            </inputLayout:SfTextInputLayout>
+
+                        </border:SfBorder>
+
+                        <border:SfBorder 
+                            BorderWidth="0" 
+                            HasShadow="True"
+                            ShadowColor="{DynamicResource Gray-600}">
+
+                            <inputLayout:SfTextInputLayout                          
+                            LeadingViewPosition="Inside"
+                            ContainerType="Outlined"
+                            ContainerBackgroundColor="White"
+                            UnfocusedColor="{DynamicResource PrimaryColor}"
+                            FocusedColor="{StaticResource SecondaryColor}"
+                            OutlineCornerRadius="5">
+
+                                <Entry IsPassword="True" Placeholder="Contraseña" />
+
+                                <inputLayout:SfTextInputLayout.LeadingView>
+                                    <Label FontFamily="{StaticResource FontIcons}" Text="{StaticResource Password}"/>
+                                </inputLayout:SfTextInputLayout.LeadingView>
+                            </inputLayout:SfTextInputLayout>
+
+                        </border:SfBorder>
+                    </StackLayout>
+
+                    <Label  x:Name="ForgotPasswordLabel"
+                        Grid.Row="3"
+                        Margin="0,16"
+                        FontFamily="{StaticResource Montserrat-SemiBold}"
+                        FontSize="18"
+                        HorizontalOptions="Center"
+                        Text="¿Olvidó su contraseña?"
+                        TextDecorations="Underline"
+                        TextColor="{StaticResource SecondaryColor}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" CommandParameter="{x:Reference ForgotPasswordLabel}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <StackLayout Grid.Row="4">
+                        <buttons:SfButton                        
+                        Margin="0,16"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Text="INICIAR SESIÓN"
+                        HorizontalOptions="FillAndExpand"
+                        Clicked="Login_Clicked">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="Opacity" Value="1" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="Opacity" Value="0.5" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </buttons:SfButton>
+                    </StackLayout>
+
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+        <buttons:SfButton Margin="20,0"
+                          Style="{StaticResource PrimaryButtonStyle}"
+                          FontFamily="{StaticResource FontIcons}"
+                          Text="{StaticResource Back}"
+                          VerticalOptions="Start"
+                          HorizontalOptions="Start" 
+                          CornerRadius="25" 
+                          HeightRequest="50" 
+                          WidthRequest="50"
+                          Clicked="SfButton_Clicked">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="Opacity" Value="1" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="Opacity" Value="0.5" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </buttons:SfButton>
+    </Grid>
+</ContentPage>
