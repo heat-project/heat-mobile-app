@@ -62,32 +62,28 @@ namespace HeatApp.ViewModels.Dashboard
                     Category = "HEART RATE",
                     CategoryValue = "87 bmp",
                     ChartData = heartRateData,
-                    BackgroundGradientStart = "#f59083",
-                    BackgroundGradientEnd = "#fae188",
+                    BackgroundGradientStart = "#F4A32C",
                 },
                 new HealthCare()
                 {
                     Category = "CALORIES BURNED",
                     CategoryValue = "948 cal",
                     ChartData = caloriesBurnedData,
-                    BackgroundGradientStart = "#ff7272",
-                    BackgroundGradientEnd = "#f650c5"
+                    BackgroundGradientStart = "#ED694A"
                 },
                 new HealthCare()
                 {
                     Category = "SLEEP TIME",
                     CategoryValue = "7.3 hrs",
                     ChartData = sleepTimeData,
-                    BackgroundGradientStart = "#5e7cea",
-                    BackgroundGradientEnd = "#1dcce3"
+                    BackgroundGradientStart = "#F4D44E"
                 },
                 new HealthCare()
                 {
                     Category = "WATER CONSUMED",
                     CategoryValue = "38.6 ltr",
                     ChartData = waterConsumedData,
-                    BackgroundGradientStart = "#255ea6",
-                    BackgroundGradientEnd = "#b350d1"
+                    BackgroundGradientStart = "#006992"
                 }
             };
 

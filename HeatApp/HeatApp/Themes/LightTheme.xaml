@@ -27,6 +27,8 @@
 
     <Color x:Key="PrimaryColor">#F4A32C</Color>
     <Color x:Key="SecondaryColor">#ED694A</Color>
+    <Color x:Key="ThirdColor">#F4D44E</Color>
+    <Color x:Key="AlternativeColor1">#006992</Color>
     <Color x:Key="PrimaryDarkColor">#d0424f</Color>
     <Color x:Key="PrimaryDarkenColor">#ab3641</Color>
     <Color x:Key="PrimaryLighterColor">#edcacd</Color>

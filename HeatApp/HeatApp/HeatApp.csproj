@@ -63,6 +63,7 @@
     <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.2.0.58" />
     <PackageReference Include="Syncfusion.Xamarin.Cards" Version="18.2.0.58" />
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.2.0.58" />
+    <PackageReference Include="Syncfusion.Xamarin.SfBackdrop" Version="18.2.0.58" />
     <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="18.2.0.58" />
     <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="18.2.0.58" />
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="18.2.0.58" />

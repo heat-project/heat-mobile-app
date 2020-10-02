@@ -18,6 +18,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Syncfusion.XForms.iOS.Backdrop;
 
 namespace HeatApp.iOS
 {
@@ -51,6 +52,7 @@ namespace HeatApp.iOS
             SfCalendarRenderer.Init();
             SfBorderRenderer.Init();
             SfButtonRenderer.Init();
+            SfBackdropPageRenderer.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             Xamarin.FormsMaps.Init();
             Xamarin.FormsGoogleMaps.Init("AIzaSyD2ZjqBONONbEATiZT8yX97iwm2biuJI5o");

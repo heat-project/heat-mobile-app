@@ -72,6 +72,9 @@
     <PackageReference Include="Syncfusion.Xamarin.Core">
       <Version>18.2.0.58</Version>
     </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfBackdrop">
+      <Version>18.2.0.58</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfCalendar">
       <Version>18.2.0.58</Version>
     </PackageReference>

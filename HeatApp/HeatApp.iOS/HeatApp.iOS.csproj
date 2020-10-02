@@ -168,6 +168,9 @@
     <PackageReference Include="Syncfusion.Xamarin.Core">
       <Version>18.2.0.58</Version>
     </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfBackdrop">
+      <Version>18.2.0.58</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfCalendar">
       <Version>18.2.0.58</Version>
     </PackageReference>
@@ -237,5 +240,8 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\icon_transparent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\small_green_bus.png" />
   </ItemGroup>
 </Project>
