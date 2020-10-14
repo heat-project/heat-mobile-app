@@ -23,7 +23,7 @@ namespace HeatApp.Views.HeatViews.Common
         {
             if (page != null) { Detail = page; }
 
-            IsPresented = false;
+            IsPresented = true;
         }
     }
 }

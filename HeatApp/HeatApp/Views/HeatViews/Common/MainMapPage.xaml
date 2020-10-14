@@ -89,6 +89,7 @@
                     ColumnSpacing="0"
                     HeightRequest="170"
                     HorizontalOptions="FillAndExpand"
+                    ItemTapped="SfListView_ItemTapped"
                     IsScrollBarVisible="False"
                     RowSpacing="0"                
                     ItemsSource="{Binding CardItems}"
@@ -341,13 +342,13 @@
             </Grid>
         </ScrollView>
 
-        --><!--
-            Initial CameraUpdate
+        
+            --><!--Initial CameraUpdate
               Location = Sao Paulo
               Zoom = 13
               Rotation = 30
-              Tilt = 60
-            --><!--
+              Tilt = 60--><!--
+            
         <maps:Map Grid.Row="1" x:Name="map"
                       VerticalOptions="FillAndExpand" />
     </Grid>-->

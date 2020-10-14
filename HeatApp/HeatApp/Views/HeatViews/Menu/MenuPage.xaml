@@ -23,8 +23,35 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <control:CustomShadowFrame
+
+                <border:SfBorder
+                                Margin="0,-60,0,16"
+                                BackgroundColor="{DynamicResource Gray-100}"
+                                BorderColor="{DynamicResource Gray-White}"
+                                BorderWidth="2"
+                                CornerRadius="10"
+                                HasShadow="True"
+                                HeightRequest="80"
                     Grid.Row="0"
+                                HorizontalOptions="CenterAndExpand"
+                                WidthRequest="80">
+
+                    <!--  Profile image  -->
+                    <Image
+                                    Aspect="Fill"
+                                    BackgroundColor="{DynamicResource Gray-200}"
+                                    HeightRequest="80"
+                                    WidthRequest="80">
+                        <Image.Source>
+                            <UriImageSource Uri="{Binding ProfileImage}" 
+			                                 CacheValidity="14" 
+			                                 CachingEnabled="true"/>
+                        </Image.Source>
+                    </Image>
+
+                </border:SfBorder>
+                <!--<control:CustomShadowFrame
+                    
                     Margin="16,16,16,32"
                     Style="{StaticResource ShadowFrameStyle}">
 
@@ -35,7 +62,7 @@
 
                         <StackLayout Spacing="0">
 
-                            <!--  Header image path  -->
+                            --><!--  Header image path  --><!--
                             <Image
                                 Aspect="Fill"
                                 BackgroundColor="{DynamicResource Gray-200}"
@@ -48,33 +75,9 @@
                                 </Image.Source>
                             </Image>
 
-                            <border:SfBorder
-                                Margin="0,-60,0,16"
-                                BackgroundColor="{DynamicResource Gray-100}"
-                                BorderColor="{DynamicResource Gray-White}"
-                                BorderWidth="2"
-                                CornerRadius="10"
-                                HasShadow="True"
-                                HeightRequest="80"
-                                HorizontalOptions="CenterAndExpand"
-                                WidthRequest="80">
 
-                                <!--  Profile image  -->
-                                <Image
-                                    Aspect="Fill"
-                                    BackgroundColor="{DynamicResource Gray-200}"
-                                    HeightRequest="80"
-                                    WidthRequest="80">
-                                    <Image.Source>
-                                        <UriImageSource Uri="{Binding ProfileImage}" 
-			                                 CacheValidity="14" 
-			                                 CachingEnabled="true"/>
-                                    </Image.Source>
-                                </Image>
 
-                            </border:SfBorder>
-
-                            <!--  Profile name  -->
+                            --><!--  Profile name  --><!--
                             <Label Style="{StaticResource HeaderLabelStyle}" Text="{Binding ProfileName}" />
 
                             <StackLayout
@@ -83,12 +86,12 @@
                                 Orientation="Horizontal"
                                 Spacing="5">
 
-                                <!--  Designation label  -->
+                                --><!--  Designation label  --><!--
                                 <Label Style="{StaticResource ContentLabelStyle}" Text="{Binding Designation}" />
 
                                 <BoxView Style="{StaticResource BoxViewStyle}" />
 
-                                <!--  state and country label  -->
+                                --><!--  state and country label  --><!--
                                 <Label Style="{StaticResource ContentLabelStyle}">
                                     <Label.FormattedText>
                                         <FormattedString>
@@ -101,14 +104,14 @@
 
                             </StackLayout>
 
-                            <!--  Follow button  -->
+                            --><!--  Follow button  --><!--
                             <buttons:SfButton x:Name="follow"
                                 Command="{Binding FollowCommand}" CommandParameter="{x:Reference follow}"
                                 Margin="0,0,0,16"
                                 Style="{StaticResource SfGradientButtonStyle}"
                                 Text="FOLLOW" />
 
-                            <!--  About title label  -->
+                            --><!--  About title label  --><!--
                             <Label
                                 Margin="{OnPlatform Default='16,0,0,4',
                                                     UWP='0,0,0,4'}"
@@ -121,7 +124,7 @@
                                 Text="About"
                                 TextColor="{DynamicResource Gray-900}" />
 
-                            <!--  About label  -->
+                            --><!--  About label  --><!--
                             <Label
                                 Margin="{OnPlatform Default='16,0,16,24',
                                                     UWP='0,0,16,24'}"
@@ -132,7 +135,7 @@
 
                         </StackLayout>
                     </border:SfBorder>
-                </control:CustomShadowFrame>
+                </control:CustomShadowFrame>-->
 
                 <!--  Interest title label  -->
                 <Label

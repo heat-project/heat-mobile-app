@@ -13,7 +13,7 @@
              xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
              xmlns:behavior ="clr-namespace:HeatApp.Behaviors;assembly=HeatApp"
              x:Name="healthCarePage"
-             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasNavigationBar="True"
              Style="{StaticResource ContentPageStyle}">
 
     <ContentPage.BindingContext>

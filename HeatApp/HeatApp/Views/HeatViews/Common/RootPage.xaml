@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HeatApp.Views.HeatViews.Common.RootPage"
              xmlns:pages="clr-namespace:HeatApp.Views.HeatViews.Common"
-             IsPresented="false"
+	         IsPresented="false"
 	         MasterBehavior="Popover"
              NavigationPage.HasNavigationBar="False"
              IsGestureEnabled="True">
