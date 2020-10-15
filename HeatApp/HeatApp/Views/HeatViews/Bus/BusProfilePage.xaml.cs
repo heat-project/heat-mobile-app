@@ -1,5 +1,4 @@
-﻿using HeatApp.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,20 +7,18 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace HeatApp.Views.HeatViews.Common
+namespace HeatApp.Views.HeatViews.Bus
 {
-    public partial class SignUpPage : ContentPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class BusProfilePage : ContentPage
     {
-        public SignUpPage()
+        public BusProfilePage()
         {
             InitializeComponent();
-            BindingContext = new SignUpViewModel(Navigation);
         }
-
         private async void SfButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PopAsync();
+            await Navigation.PopModalAsync();
         }
-
     }
 }

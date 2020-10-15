@@ -56,6 +56,7 @@ namespace HeatApp.iOS
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             Xamarin.FormsMaps.Init();
             Xamarin.FormsGoogleMaps.Init("AIzaSyD2ZjqBONONbEATiZT8yX97iwm2biuJI5o");
+            Rg.Plugins.Popup.Popup.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

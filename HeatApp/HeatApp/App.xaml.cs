@@ -1,8 +1,11 @@
+using HeatApp.Interfaces;
+using HeatApp.Services;
 using HeatApp.Views.Dashboard;
 using HeatApp.Views.Forms;
 using HeatApp.Views.HeatViews;
 using HeatApp.Views.HeatViews.Common;
 using HeatApp.Views.Navigation;
+using HeatApp.Views.Profile;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,7 +19,7 @@ namespace HeatApp
         {
             InitializeComponent();
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzE4NzkyQDMxMzgyZTMyMmUzMEpENWQ0ZXM5WXpWc2hyNW1xNXI0OUYveU9Fd3VWS21KQ0xqZHZBdnRiNWc9");
-
+            SetServices();
             MainPage = new NavigationPage(new InitialPage());
         }
 
@@ -31,5 +34,12 @@ namespace HeatApp
         protected override void OnResume()
         {
         }
+
+        #region AuxiliarMethods
+        public void SetServices()
+        {
+            DependencyService.Register<ISecurityService, SecurityService>();
+        }
+        #endregion
     }
 }

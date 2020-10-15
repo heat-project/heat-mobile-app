@@ -6,19 +6,26 @@
              xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms" 
              xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms" 
              xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:behaviors="clr-namespace:HeatApp.Behaviors" 
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             xmlns:control="clr-namespace:HeatApp.Views.HeatViews.Controls" 
+             xmlns:converter="clr-namespace:HeatApp.Converters"
              ios:Page.UseSafeArea="true"
              NavigationPage.HasBackButton="False"
              NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter"/>
+            <converter:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        
         <ScrollView Grid.Row="0">
-
             <StackLayout Margin="{core:OnPlatformOrientationThickness PhonePortrait='20,32',
                                                                       PhoneLandscape='150,32',
                                                                       TabletPortrait='200,50',
@@ -39,13 +46,6 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <!--<ff:CachedImage Grid.Row="0"
-                                    Margin="10"
-                                    Source= "logo_transparent.png"
-                                    WidthRequest="100"
-                                    HeightRequest="100"
-                                    HorizontalOptions="End"/>-->
-
                     <Label Grid.Row="1"
                        Margin="15"
                        TextColor="{StaticResource PrimaryColor}"
@@ -55,106 +55,85 @@
                        HorizontalTextAlignment="Center"
                        Text="Registrarse"
                        LineBreakMode="WordWrap" />
+                    <ScrollView Grid.Row="2">
+                        <StackLayout Spacing="0" 
+                                     Margin="10">
 
-                    <StackLayout Grid.Row="2" 
-                             Spacing="0" 
-                             Margin="10">
+                            <control:ValidationEntryView PlaceHolder="Nombres" 
+                                                     Text="{Binding FirstName.Value}"                                           
+                                                     FontFamily="{StaticResource FontIcons}"
+                                                     IsValid="{Binding FirstName.IsValid}"
+                                                     Icon="{StaticResource AvatarIcon}"/>
 
-                        <border:SfBorder 
-                            BorderWidth="0" 
-                            HasShadow="True"
-                            ShadowColor="{DynamicResource Gray-600}">
+                            <Label Text="{Binding FirstName.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                               IsVisible="{Binding FirstName.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                               Style="{StaticResource ErrorTextStyle}"/>
 
-                            <inputLayout:SfTextInputLayout                          
-                            LeadingViewPosition="Inside"
-                            ContainerType="Outlined"
-                            ContainerBackgroundColor="White"
-                            UnfocusedColor="{DynamicResource PrimaryColor}"
-                            FocusedColor="{StaticResource SecondaryColor}"
-                            OutlineCornerRadius="5">
+                            <control:ValidationEntryView PlaceHolder="Apellidos" 
+                                                     Text="{Binding LastName.Value}"                                           
+                                                     FontFamily="{StaticResource FontIcons}" 
+                                                     IsValid="{Binding LastName.IsValid}"
+                                                     Icon="{StaticResource AvatarIcon}"/>
 
-                                <Entry Placeholder="Nombre Completo"/>
+                            <Label Text="{Binding LastName.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                               IsVisible="{Binding LastName.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                               Style="{StaticResource ErrorTextStyle}"/>
 
-                                <inputLayout:SfTextInputLayout.LeadingView>
-                                    <Label FontFamily="{StaticResource FontIcons}" Text="{StaticResource AvatarIcon}"/>
-                                </inputLayout:SfTextInputLayout.LeadingView>
-                            </inputLayout:SfTextInputLayout>
+                            <control:ValidationEntryView PlaceHolder="Correo Electrónico" 
+                                                     Text="{Binding Email.Value}"                                           
+                                                     FontFamily="{StaticResource FontIcons}" 
+                                                     IsValid="{Binding Email.IsValid}"
+                                                     Icon="{StaticResource AvatarIcon}"/>
 
-                        </border:SfBorder>
+                            <Label Text="{Binding Email.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                               IsVisible="{Binding Email.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                               Style="{StaticResource ErrorTextStyle}"/>
 
-                        <border:SfBorder 
-                            BorderWidth="0" 
-                            HasShadow="True"
-                            ShadowColor="{DynamicResource Gray-600}">
+                            <control:ValidationEntryView PlaceHolder="Telefono" 
+                                                     Text="{Binding PhoneNumber.Value}"
+                                                     IsValid="{Binding PhoneNumber.IsValid}"
+                                                     Mask="(XXX) XXX-XXXX" 
+                                                     Keyboard="Numeric"  
+                                                     FontFamily="{StaticResource FontIcons}"
+                                                     Icon="{StaticResource Phone}"/>
 
-                            <inputLayout:SfTextInputLayout                          
-                            LeadingViewPosition="Inside"
-                            ContainerType="Outlined"
-                            ContainerBackgroundColor="White"
-                            UnfocusedColor="{DynamicResource PrimaryColor}"
-                            FocusedColor="{StaticResource SecondaryColor}"
-                            OutlineCornerRadius="5">
+                            <Label Text="{Binding PhoneNumber.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                               IsVisible="{Binding PhoneNumber.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                               Style="{StaticResource ErrorTextStyle}"/>
 
-                                <Entry Placeholder="Usuario"/>
+                            <control:ValidationEntryView PlaceHolder="Contraseña" 
+                                                     Text="{Binding Password.Item1.Value}"
+                                                     IsValid="{Binding Password.Item1.IsValid}"
+                                                     IsPassword="True" 
+                                                     FontFamily="{StaticResource FontIcons}" 
+                                                     Icon="{StaticResource Password}"/>
 
-                                <inputLayout:SfTextInputLayout.LeadingView>
-                                    <Label FontFamily="{StaticResource FontIcons}" Text="{StaticResource AvatarIcon}"/>
-                                </inputLayout:SfTextInputLayout.LeadingView>
-                            </inputLayout:SfTextInputLayout>
+                            <Label Text="{Binding Password.Item1.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                               IsVisible="{Binding Password.Item1.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                               Style="{StaticResource ErrorTextStyle}"/>
 
-                        </border:SfBorder>
+                            <control:ValidationEntryView PlaceHolder="Confirmar Contraseña" 
+                                                     Text="{Binding Password.Item2.Value}"
+                                                     IsValid="{Binding Password.Item2.IsValid}"
+                                                     IsPassword="True" 
+                                                     FontFamily="{StaticResource FontIcons}" 
+                                                     Icon="{StaticResource Password}"/>
 
-                        <border:SfBorder 
-                            BorderWidth="0" 
-                            HasShadow="True"
-                            ShadowColor="{DynamicResource Gray-600}">
+                            <Label Text="{Binding Password.Item2.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                               IsVisible="{Binding Password.Item2.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                               Style="{StaticResource ErrorTextStyle}"/>
 
-                            <inputLayout:SfTextInputLayout                          
-                            LeadingViewPosition="Inside"
-                            ContainerType="Outlined"
-                            ContainerBackgroundColor="White"
-                            UnfocusedColor="{DynamicResource PrimaryColor}"
-                            FocusedColor="{StaticResource SecondaryColor}"
-                            OutlineCornerRadius="5">
+                        </StackLayout>
+                    </ScrollView>
 
-                                <Entry IsPassword="True" Placeholder="Contraseña" />
-
-                                <inputLayout:SfTextInputLayout.LeadingView>
-                                    <Label FontFamily="{StaticResource FontIcons}" Text="{StaticResource Password}"/>
-                                </inputLayout:SfTextInputLayout.LeadingView>
-                            </inputLayout:SfTextInputLayout>
-
-                        </border:SfBorder>
-
-                        <border:SfBorder 
-                            BorderWidth="0" 
-                            HasShadow="True"
-                            ShadowColor="{DynamicResource Gray-600}">
-
-                            <inputLayout:SfTextInputLayout                          
-                            LeadingViewPosition="Inside"
-                            ContainerType="Outlined"
-                            ContainerBackgroundColor="White"
-                            UnfocusedColor="{DynamicResource PrimaryColor}"
-                            FocusedColor="{StaticResource SecondaryColor}"
-                            OutlineCornerRadius="5">
-
-                                <Entry IsPassword="True" Placeholder="Confirmar Contraseña" />
-
-                                <inputLayout:SfTextInputLayout.LeadingView>
-                                    <Label FontFamily="{StaticResource FontIcons}" Text="{StaticResource Password}"/>
-                                </inputLayout:SfTextInputLayout.LeadingView>
-                            </inputLayout:SfTextInputLayout>
-
-                        </border:SfBorder>
-                    </StackLayout>
 
                     <StackLayout Grid.Row="3">
-                        <buttons:SfButton                        
-                        Margin="0,16"
-                        Style="{StaticResource PrimaryOutlineButtonStyle}"
-                        Text="REGISTRARSE"
-                        HorizontalOptions="FillAndExpand">
+                        <buttons:SfButton Margin="0,16"
+                                          Style="{StaticResource PrimaryOutlineButtonStyle}"
+                                          Command="{Binding SignUpCommand}"
+                                          IsEnabled="{Binding IsNotBusy}"
+                                          Text="REGISTRARSE"
+                                          HorizontalOptions="FillAndExpand">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal">
@@ -176,11 +155,12 @@
                 </Grid>
             </StackLayout>
         </ScrollView>
-        
+
         <buttons:SfButton Margin="20,0"
                           Style="{StaticResource PrimaryButtonStyle}"
                           FontFamily="{StaticResource FontIcons}"
                           Text="{StaticResource Back}"
+                          IsEnabled="{Binding IsNotBusy}"
                           VerticalOptions="Start"
                           HorizontalOptions="Start" 
                           CornerRadius="25" 
