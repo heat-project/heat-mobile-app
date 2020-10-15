@@ -6,7 +6,8 @@
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" 
              xmlns:viewModel="clr-namespace:HeatApp.ViewModels.Social" 
              xmlns:control="clr-namespace:HeatApp.Controls" 
-             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" xmlns:viewModel1="clr-namespace:HeatApp.ViewModels.HeatViewModels.Common"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
+             xmlns:viewModel1="clr-namespace:HeatApp.ViewModels.HeatViewModels.Common"
              x:Class="HeatApp.Views.HeatViews.Menu.MenuPage"  
              Title="Menu">
     <ContentPage.BindingContext>
@@ -24,7 +25,8 @@
                 </Grid.RowDefinitions>
 
 
-              <StackLayout BackgroundColor="#FFB007" Grid.Row="0">
+                <StackLayout BackgroundColor="#FFB007" Grid.Row="0"
+                             Padding="0,40,0,0">
                     <border:SfBorder
                                 Margin="16,20,0,0"
                                 BackgroundColor="{DynamicResource Gray-100}"
@@ -37,20 +39,20 @@
                                 HorizontalOptions="StartAndExpand"
                                 WidthRequest="80">
 
-                    <!--  Profile image  -->
-                    <Image
+                        <!--  Profile image  -->
+                        <Image
                                     Aspect="Fill"
                                     BackgroundColor="{DynamicResource Gray-200}"
                                     HeightRequest="86"
                                     WidthRequest="86">
-                        <Image.Source>
-                            <UriImageSource Uri="{Binding ProfileImage}" 
+                            <Image.Source>
+                                <UriImageSource Uri="{Binding ProfileImage}" 
 			                                 CacheValidity="14" 
 			                                 CachingEnabled="true"/>
-                        </Image.Source>
-                    </Image>
+                            </Image.Source>
+                        </Image>
 
-                </border:SfBorder>
+                    </border:SfBorder>
 
                     <Label
                         Margin="16,0,0,16"
@@ -63,7 +65,7 @@
                                                 Android=1.5}"
                         Text="Carlos Acosta"
                         TextColor="White" />
-              </StackLayout>
+                </StackLayout>
                 <!--<control:CustomShadowFrame
                     
                     Margin="16,16,16,32"
@@ -76,7 +78,9 @@
 
                         <StackLayout Spacing="0">
 
-                            --><!--  Header image path  --><!--
+                            -->
+                <!--  Header image path  -->
+                <!--
                             <Image
                                 Aspect="Fill"
                                 BackgroundColor="{DynamicResource Gray-200}"
@@ -91,7 +95,9 @@
 
 
 
-                            --><!--  Profile name  --><!--
+                            -->
+                <!--  Profile name  -->
+                <!--
                             <Label Style="{StaticResource HeaderLabelStyle}" Text="{Binding ProfileName}" />
 
                             <StackLayout
@@ -100,12 +106,16 @@
                                 Orientation="Horizontal"
                                 Spacing="5">
 
-                                --><!--  Designation label  --><!--
+                                -->
+                <!--  Designation label  -->
+                <!--
                                 <Label Style="{StaticResource ContentLabelStyle}" Text="{Binding Designation}" />
 
                                 <BoxView Style="{StaticResource BoxViewStyle}" />
 
-                                --><!--  state and country label  --><!--
+                                -->
+                <!--  state and country label  -->
+                <!--
                                 <Label Style="{StaticResource ContentLabelStyle}">
                                     <Label.FormattedText>
                                         <FormattedString>
@@ -118,14 +128,18 @@
 
                             </StackLayout>
 
-                            --><!--  Follow button  --><!--
+                            -->
+                <!--  Follow button  -->
+                <!--
                             <buttons:SfButton x:Name="follow"
                                 Command="{Binding FollowCommand}" CommandParameter="{x:Reference follow}"
                                 Margin="0,0,0,16"
                                 Style="{StaticResource SfGradientButtonStyle}"
                                 Text="FOLLOW" />
 
-                            --><!--  About title label  --><!--
+                            -->
+                <!--  About title label  -->
+                <!--
                             <Label
                                 Margin="{OnPlatform Default='16,0,0,4',
                                                     UWP='0,0,0,4'}"
@@ -138,7 +152,9 @@
                                 Text="About"
                                 TextColor="{DynamicResource Gray-900}" />
 
-                            --><!--  About label  --><!--
+                            -->
+                <!--  About label  -->
+                <!--
                             <Label
                                 Margin="{OnPlatform Default='16,0,16,24',
                                                     UWP='0,0,16,24'}"
@@ -152,7 +168,7 @@
                 </control:CustomShadowFrame>-->
 
                 <!--  Interest title label  -->
-              
+
 
                 <listView:SfListView
                     Grid.Row="1"
@@ -177,7 +193,7 @@
                     </listView:SfListView.ItemTemplate>
                 </listView:SfListView>
 
-                  <!--<Label
+                <!--<Label
                     Grid.Row="1"
                     Margin="16,16,0,12"
                     FontFamily="{StaticResource Montserrat-SemiBold}"

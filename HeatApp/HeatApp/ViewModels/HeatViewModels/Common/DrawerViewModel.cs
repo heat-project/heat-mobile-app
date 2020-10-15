@@ -33,9 +33,9 @@ namespace HeatApp.ViewModels.HeatViewModels.Common
 
             this.Menu = new ObservableCollection<ProfileModel>()
             {
-                new ProfileModel { Name = "Rutas", ImagePath = "route.png" },
+                new ProfileModel { Name = "Rutas", ImagePath = "routes.png" },
                 new ProfileModel { Name = "Ayuda", ImagePath = "help.png" },
-                new ProfileModel { Name = "Notificaciones", ImagePath = "notify.png" },
+                new ProfileModel { Name = "Notificaciones", ImagePath = "notif.png" },
                 new ProfileModel { Name = "Configuraciones", ImagePath = "settings.png" },
             };
 
