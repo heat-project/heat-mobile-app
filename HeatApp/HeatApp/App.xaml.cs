@@ -5,6 +5,7 @@ using HeatApp.Views.Forms;
 using HeatApp.Views.HeatViews;
 using HeatApp.Views.HeatViews.Common;
 using HeatApp.Views.Navigation;
+using HeatApp.Views.Profile;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

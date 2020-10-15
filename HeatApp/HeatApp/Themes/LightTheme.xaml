@@ -26,6 +26,10 @@
     <x:String x:Key="Search">&#xe705;</x:String>
     <x:String x:Key="Phone">&#xe71c;</x:String>
     <x:String x:Key="Delete">&#xe716;</x:String>
+    <x:String x:Key="Rating">&#xe703;</x:String>
+    <x:String x:Key="Calendar">&#xe752;</x:String>
+    <x:String x:Key="Home">&#xe706;</x:String>
+    <x:String x:Key="Close">&#xe724;</x:String>
 
     <Color x:Key="PrimaryColor">#F4A32C</Color>
     <Color x:Key="SecondaryColor">#ED694A</Color>

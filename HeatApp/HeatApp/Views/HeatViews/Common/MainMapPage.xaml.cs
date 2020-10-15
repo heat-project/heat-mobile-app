@@ -198,7 +198,7 @@ namespace HeatApp.Views.HeatViews.Common
         {
             e.Handled = true;
 
-            Navigation.PushModalAsync(new BusProfilePage());
+            Navigation.PushModalAsync(new NavigationPage(new  BusProfilePage()));
         }
     }
 }
