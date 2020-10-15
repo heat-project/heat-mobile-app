@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
+             xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms" 
+             xmlns:behaviors="clr-namespace:HeatApp.Behaviors"
+             x:Class="HeatApp.Views.HeatViews.Controls.EntryView">
+    <border:SfBorder  BorderWidth="0" 
+                      HasShadow="True"
+                      ShadowColor="{DynamicResource Gray-600}">
+
+        <inputLayout:SfTextInputLayout LeadingViewPosition="Inside"
+                                       ContainerType="Outlined"
+                                       ContainerBackgroundColor="White"
+                                       UnfocusedColor="{DynamicResource PrimaryColor}"
+                                       FocusedColor="{StaticResource SecondaryColor}"
+                                       OutlineCornerRadius="5">
+
+            <Entry x:Name="entry" TextChanged="EntryValue_TextChanged" />
+
+            <inputLayout:SfTextInputLayout.LeadingView>
+                <Label x:Name="label"/>
+            </inputLayout:SfTextInputLayout.LeadingView>
+        </inputLayout:SfTextInputLayout>
+    </border:SfBorder>
+</ContentView>

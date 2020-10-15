@@ -1,6 +1,8 @@
-﻿using HeatApp.ViewModels;
+﻿using HeatApp.Controls.PopupPages;
+using HeatApp.ViewModels;
 using HeatApp.Views.HeatViews;
 using HeatApp.Views.HeatViews.Common;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -8,24 +10,21 @@ using Xamarin.Forms;
 
 namespace HeatApp
 {
-    public class InitialViewModel: BaseViewModel
+    public class InitialViewModel : BaseViewModel
     {
         #region Constructors
-        public InitialViewModel(INavigation navigation) : base(navigation: navigation)
-        {
-            this.navigation = navigation;
-        }
+        public InitialViewModel(INavigation navigation) : base(navigation: navigation) { }
         #endregion
 
         #region Commands
         private ICommand goToLoginCommand;
-        public ICommand GoToLoginCommand => goToLoginCommand ?? (goToLoginCommand = new Command(async () => await GoToLogin()));     
+        public ICommand GoToLoginCommand => goToLoginCommand ?? (goToLoginCommand = new Command(async () => await GoToLogin()));
         private ICommand goToSignUpCommand;
         public ICommand GoToSignUpCommand => goToSignUpCommand ?? (goToSignUpCommand = new Command(async () => await GoToSignUp()));
         #endregion
 
         #region Methods
-        public async Task GoToLogin() 
+        public async Task GoToLogin()
         {
             try
             {
@@ -37,7 +36,7 @@ namespace HeatApp
                 throw;
             }
         }
-        public async Task GoToSignUp() 
+        public async Task GoToSignUp()
         {
             try
             {

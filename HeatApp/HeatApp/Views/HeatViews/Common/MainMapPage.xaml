@@ -23,6 +23,7 @@
                   Grid.Row="0"
                   MapType="Street"
                   InitialCameraUpdate="18.472384,-69.921611,18"
+                  PinClicked="Map_PinClicked"
                   VerticalOptions="FillAndExpand" />
 
         <buttons:SfButton Grid.Row="0"

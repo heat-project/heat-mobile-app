@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"
+             NavigationPage.IconColor="{StaticResource PrimaryColor}"
+             NavigationPage.HasNavigationBar="True"
+             NavigationPage.HasBackButton="True"
+             NavigationPage.BackButtonTitle="Atrás"
+             Title="Acerca de la Ruta C12B"
+             x:Class="HeatApp.Views.HeatViews.Bus.BusProfilePage">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <ScrollView Grid.Row="0"
+                    VerticalOptions="StartAndExpand">
+
+        </ScrollView>
+        
+        <StackLayout VerticalOptions="EndAndExpand" Grid.Row="0" Spacing="0">
+            <buttons:SfButton
+                        Margin="0,16"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Text="INICIAR SESIÓN"
+                        Command="{Binding GoToLoginCommand}"
+                        HorizontalOptions="FillAndExpand"/>
+        </StackLayout>
+    </Grid>
+</ContentPage>

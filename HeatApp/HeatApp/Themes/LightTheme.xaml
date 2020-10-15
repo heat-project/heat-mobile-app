@@ -24,6 +24,8 @@
     <x:String x:Key="Add">&#xe730;</x:String>
     <x:String x:Key="Settings">&#xe72b;</x:String>
     <x:String x:Key="Search">&#xe705;</x:String>
+    <x:String x:Key="Phone">&#xe71c;</x:String>
+    <x:String x:Key="Delete">&#xe716;</x:String>
 
     <Color x:Key="PrimaryColor">#F4A32C</Color>
     <Color x:Key="SecondaryColor">#ED694A</Color>
@@ -70,6 +72,17 @@
     <Color x:Key="FacebookBlue">#4267B2</Color>
     <Color x:Key="LightGreen">#35c659</Color>
     <Color x:Key="FacebookLogin">#3b5998</Color>
+    <!-- INDICATOR COLORS -->
+    <Color
+		x:Key="OkColor">#22C064</Color>
+    <Color
+		x:Key="ErrorColor">Red</Color>
+    <Color
+		x:Key="WarningColor">#ffc107</Color>
+    <Color
+    x:Key="Warning2Color">#FFE599</Color>
+    <Color
+		x:Key="NotificationColor">#1274d1</Color>
 
     <OnPlatform x:Key="FontIcons" x:TypeArguments="x:String">
         <OnPlatform.Platforms>
@@ -468,5 +481,9 @@
         <Setter Property="CornerRadius" Value="1" />
         <Setter Property="BorderWidth" Value="0"/>
     </Style>
-
+    
+    <Style TargetType="Label" x:Key="ErrorTextStyle">
+        <Setter Property="TextColor" Value = "{DynamicResource Red}"   />
+        <Setter Property="FontSize" Value = "12"   />
+    </Style>
 </ResourceDictionary>

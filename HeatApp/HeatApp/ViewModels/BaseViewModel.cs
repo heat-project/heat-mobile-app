@@ -37,8 +37,53 @@ namespace HeatApp.ViewModels
 
         #endregion
 
-        #region Methods
+        #region Properties
+        private string _title;
+        public string Title
+        {
+            get
+            {
+                return _title;
+            }
+            set
+            {
+                SetProperty(ref _title, value);
+            }
+        }
+        private string _loadingMessage;
+        public string LoadingMessage
+        {
+            get
+            {
+                return _loadingMessage;
+            }
+            private set
+            {
+                SetProperty(ref _loadingMessage, value);
+            }
+        }
+        private bool _isBusy;
+        public bool IsBusy
+        {
+            get
+            {
+                return _isBusy;
+            }
+            private set
+            {
+                SetProperty(ref _isBusy, value);
+            }
+        }
+        public bool IsNotBusy
+        {
+            get
+            {
+                return !IsBusy;
+            }
+        }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// The PropertyChanged event occurs when changing the value of property.
         /// </summary>
@@ -47,7 +92,23 @@ namespace HeatApp.ViewModels
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        public bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(storage, value))
+            {
+                return false;
+            }
+            storage = value;
+            NotifyPropertyChanged(propertyName);
 
+            return true;
+        }
+        public void SetLoadingMessage(string message = Constants.Messages.Loading)
+            => LoadingMessage = message;
+        public void StartBusy()
+            => IsBusy = true;
+        public void EndBusy()
+            => IsBusy = false;
         #endregion
     }
 }

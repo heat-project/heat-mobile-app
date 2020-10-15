@@ -22,7 +22,7 @@ namespace HeatApp.Helpers
         #endregion
 
         #region Propertties
-        public static string GeneralSettings
+        public static string Token
         {
             get
             {
