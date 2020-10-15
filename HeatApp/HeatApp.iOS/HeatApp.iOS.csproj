@@ -247,4 +247,16 @@
   <ItemGroup>
     <BundleResource Include="Resources\small_green_bus.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\notif.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\routes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\settings.png" />
+  </ItemGroup>
 </Project>
