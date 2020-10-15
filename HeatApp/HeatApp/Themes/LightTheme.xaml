@@ -30,6 +30,7 @@
     <x:String x:Key="Calendar">&#xe752;</x:String>
     <x:String x:Key="Home">&#xe706;</x:String>
     <x:String x:Key="Close">&#xe724;</x:String>
+    <x:String x:Key="MapPin">&#xe729;</x:String>
 
     <Color x:Key="PrimaryColor">#F4A32C</Color>
     <Color x:Key="SecondaryColor">#ED694A</Color>

@@ -190,6 +190,7 @@ namespace HeatApp.Views.HeatViews.Common
         }
         private void SfListView_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
         {
+            this.myLocation.IsVisible = true;
             DrawRoute();
         }
         // Do NOT mark async method.
@@ -199,6 +200,12 @@ namespace HeatApp.Views.HeatViews.Common
             e.Handled = true;
 
             Navigation.PushModalAsync(new NavigationPage(new  BusProfilePage()));
+        }
+
+        private void myLocation_Clicked(object sender, EventArgs e)
+        {
+            GetCurrentLocation();
+            this.myLocation.IsVisible = false;
         }
     }
 }
