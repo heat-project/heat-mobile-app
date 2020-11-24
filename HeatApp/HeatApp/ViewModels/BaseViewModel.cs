@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
-using System.Text;
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -35,6 +34,13 @@ namespace HeatApp.ViewModels
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        #endregion
+
+        #region Commands
+        private ICommand closePageCommand;
+        public ICommand ClosePageCommand => closePageCommand ?? new Command(async () => await navigation.PopAsync());
+        private ICommand closeModalCommand;
+        public ICommand CloseModalCommand => closeModalCommand ?? new Command(async () => await navigation.PopModalAsync());
         #endregion
 
         #region Properties
@@ -90,7 +96,7 @@ namespace HeatApp.ViewModels
         /// <param name="propertyName">The PropertyName</param>
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         public bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {

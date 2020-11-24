@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HeatApp.ViewModels.HeatViewModels.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace HeatApp.Views.HeatViews.Menu
         public MenuPage()
         {
             InitializeComponent();
+            BindingContext = new DrawerViewModel(Navigation);
         }
     }
 }

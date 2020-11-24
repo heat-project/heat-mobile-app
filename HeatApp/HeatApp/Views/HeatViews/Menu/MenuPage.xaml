@@ -9,11 +9,8 @@
              xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
              xmlns:viewModel1="clr-namespace:HeatApp.ViewModels.HeatViewModels.Common"
              x:Class="HeatApp.Views.HeatViews.Menu.MenuPage"  
+             x:Name="rootPage"
              Title="Menu">
-    <ContentPage.BindingContext>
-        <viewModel1:DrawerViewModel />
-    </ContentPage.BindingContext>
-
     <ContentPage.Content>
         <ContentView>
             <Grid RowSpacing="0">
@@ -23,7 +20,6 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-
 
                 <StackLayout BackgroundColor="#FFB007" Grid.Row="0"
                              Padding="0,40,0,0">
@@ -183,12 +179,23 @@
                     Orientation="Vertical"
                     RowSpacing="0"
                     BackgroundColor="White"
-                    SelectionBackgroundColor="Transparent"
-                    TapCommand="{Binding ProfileSelectedCommand}">
+                    SelectionBackgroundColor="Transparent">
 
                     <listView:SfListView.ItemTemplate>
                         <DataTemplate>
-                            <local:ProfileTemplate />
+                            <ViewCell>
+                                <StackLayout>
+                                    <Button TextColor="{x:StaticResource AlternativeColor1}" 
+                                            HorizontalOptions="StartAndExpand"
+                                            Margin="15,0"
+                                            FontSize="25"
+                                            FontFamily="{StaticResource Montserrat-Medium}"
+                                            Text="{Binding Name}"
+                                            Command="{Binding BindingContext.MenuItemTapCommand, Source={x:Reference rootPage}}"
+                                            CommandParameter="{Binding .}"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <!--<local:ProfileTemplate />-->
                         </DataTemplate>
                     </listView:SfListView.ItemTemplate>
                 </listView:SfListView>

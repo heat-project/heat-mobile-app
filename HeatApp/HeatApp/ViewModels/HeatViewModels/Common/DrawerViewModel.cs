@@ -1,5 +1,6 @@
-﻿using Syncfusion.XForms.Buttons;
+﻿using HeatApp.Views.HeatViews.Routes;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -26,12 +27,12 @@ namespace HeatApp.ViewModels.HeatViewModels.Common
         /// <summary>
         /// Initializes a new instance for the <see cref="SocialProfileViewModel" /> class.
         /// </summary>
-        public DrawerViewModel()
+        public DrawerViewModel(INavigation navigation) : base(navigation)
         {
             //this.HeaderImagePath = "Album2.png";
-            this.ProfileImage = "ProfileImage16.png";
+            ProfileImage = "ProfileImage16.png";
 
-            this.Menu = new ObservableCollection<ProfileModel>()
+            Menu = new ObservableCollection<ProfileModel>()
             {
                 new ProfileModel { Name = "Rutas", ImagePath = "routes.png" },
                 new ProfileModel { Name = "Ayuda", ImagePath = "help.png" },
@@ -39,63 +40,16 @@ namespace HeatApp.ViewModels.HeatViewModels.Common
                 new ProfileModel { Name = "Configuraciones", ImagePath = "settings.png" },
             };
 
-            //this.Connections = new ObservableCollection<ProfileModel>()
-            //{
-            //    new ProfileModel { Name = "Rose King", ImagePath = "ProfileImage7.png" },
-            //    new ProfileModel { Name = "Jeanette Bell", ImagePath = "ProfileImage9.png" },
-            //    new ProfileModel { Name = "Lily Castro", ImagePath = "ProfileImage10.png" },
-            //    new ProfileModel { Name = "Susie Moss", ImagePath = "ProfileImage11.png" },
-            //    new ProfileModel { Name = "Rose King", ImagePath = "ProfileImage7.png" },
-            //    new ProfileModel { Name = "Jeanette Bell", ImagePath = "ProfileImage9.png" },
-            //    new ProfileModel { Name = "Lily Castro", ImagePath = "ProfileImage10.png" },
-            //    new ProfileModel { Name = "Susie Moss", ImagePath = "ProfileImage11.png" }
-            //};
-
-            //this.Pictures = new ObservableCollection<ProfileModel>()
-            //{
-            //    new ProfileModel { ImagePath = "ProfileImage8.png" },
-            //    new ProfileModel { ImagePath = "Album6.png" },
-            //    new ProfileModel { ImagePath = "ArticleImage4.jpg" },
-            //    new ProfileModel { ImagePath = "Recipe17.png" },
-            //    new ProfileModel { ImagePath = "ArticleImage5.jpg" },
-            //    new ProfileModel { ImagePath = "Mask.png" }
-            //};
-
-            //this.ImageTapCommand = new Command(this.ImageClicked);
-            //this.FollowCommand = new Command(this.FollowClicked);
-            //this.MessageCommand = new Command(this.MessageClicked);
-            //this.AddConnectionCommand = new Command(this.AddConnectionClicked);
-            //this.ProfileSelectedCommand = new Command(this.ProfileClicked);
+            MenuItemTapCommand = new Command<ProfileModel>(async (profile) => await OnMenuItemTapped(profile));
         }
 
         #endregion
 
         #region Commands
-
-        /// <summary>
-        /// Gets or sets the command that is executed when the Follow button is clicked.
-        /// </summary>
-        public ICommand FollowCommand { get; set; }
-
-        /// <summary>
-        /// Gets or sets the command that is executed when the message button is clicked.
-        /// </summary>
-        public ICommand MessageCommand { get; set; }
-
-        /// <summary>
-        /// Gets or sets the command that is executed when the AddConnection button is clicked.
-        /// </summary>
-        public ICommand AddConnectionCommand { get; set; }
-
-        /// <summary>
-        /// Gets or sets the command that is executed when the Image is tapped.
-        /// </summary>
-        public ICommand ImageTapCommand { get; set; }
-
         /// <summary>
         /// Gets or sets the command that is executed when the profile item is tapped.
         /// </summary>
-        public ICommand ProfileSelectedCommand { get; set; }
+        public ICommand MenuItemTapCommand { get; set; }
 
         #endregion
 
@@ -108,13 +62,13 @@ namespace HeatApp.ViewModels.HeatViewModels.Common
         {
             get
             {
-                return this.menu;
+                return menu;
             }
 
             set
             {
-                this.menu = value;
-                this.NotifyPropertyChanged();
+                menu = value;
+                NotifyPropertyChanged();
             }
         }
 
@@ -149,8 +103,8 @@ namespace HeatApp.ViewModels.HeatViewModels.Common
         /// </summary>
         public string ProfileImage
         {
-            get { return App.BaseImageUrl + this.profileImage; }
-            set { this.profileImage = value; }
+            get { return App.BaseImageUrl + profileImage; }
+            set { profileImage = value; }
         }
 
         /// <summary>
@@ -205,60 +159,16 @@ namespace HeatApp.ViewModels.HeatViewModels.Common
         #endregion
 
         #region Methods
+        private async Task OnMenuItemTapped(ProfileModel profile)
+        {
+            switch (profile.Name)
+            {
+                case "Rutas":
+                    await navigation.PushModalAsync(new RoutePage());
+                    break;
+            }
 
-        /// <summary>
-        /// Invoked when the Follow button is clicked.
-        /// </summary>
-        // <param name="obj">The Object</param>
-        //private void FollowClicked(object obj)
-        //{
-        //    SfButton button = obj as SfButton;
-        //    if (button.Text == "FOLLOW")
-        //    {
-        //        button.Text = "FOLLOWED";
-        //    }
-        //    else if (button.Text == "FOLLOWED")
-        //    {
-        //        button.Text = "FOLLOW";
-        //    }
-        //}
-
-        /// <summary>
-        /// Invoked when the message button is clicked.
-        /// </summary>
-        // <param name="obj">The Object</param>
-        //private void MessageClicked(object obj)
-        //{
-        //    // Do something
-        //}
-
-        /// <summary>
-        /// Invoked when the AddConnection button is clicked.
-        /// </summary>
-        // <param name="obj">The Object</param>
-        //private void AddConnectionClicked(object obj)
-        //{
-        //    // Do something
-        //}
-
-        /// <summary>
-        /// Invoked when the Image is tapped.
-        /// </summary>
-        // <param name="obj">The Object</param>
-        //private void ImageClicked(object obj)
-        //{
-        //    // Do something
-        //}
-
-        /// <summary>
-        /// Invoked when the profile is tapped.
-        /// </summary>
-        // <param name="obj">The Object</param>
-        //private void ProfileClicked(object obj)
-        //{
-        //    // Do something
-        //}
-
+        }
         #endregion
     }
 }
