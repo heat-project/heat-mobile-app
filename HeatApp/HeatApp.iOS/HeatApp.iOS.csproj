@@ -259,4 +259,15 @@
   <ItemGroup>
     <BundleResource Include="Resources\settings.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\user_marker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\bus_station.png" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties TriggeredFromHotReload="False" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

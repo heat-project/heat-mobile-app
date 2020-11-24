@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HeatApp.Views.HeatViews.Map.SearchHeaderView"
+             Padding="15,20"
+             ColumnSpacing="10"
+             RowSpacing="10"
+             BackgroundColor="{DynamicResource PrimaryColor}"
+             VerticalOptions="Start">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+    </Grid.ColumnDefinitions>
+
+    <Label Margin="0,0,0,0"
+           x:Name="ic_Back"
+           HeightRequest="30"
+           WidthRequest="30"
+           TextColor="{StaticResource Gray-100}"
+           FontFamily="{StaticResource FontIcons}"
+           Grid.Row="0"
+           Grid.Column="0"/>
+
+    <StackLayout Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.RowSpan="2"
+                    Padding="0,10"
+                    Spacing="0"
+                    HorizontalOptions="Center">
+        <BoxView HeightRequest="5"
+                       WidthRequest="5"
+                       CornerRadius="2.5"
+                       Color="{StaticResource Gray-100}"
+                       x:Name="originView">
+            <BoxView.Triggers>
+                <DataTrigger TargetType="BoxView"
+                                     Binding="{Binding Source={x:Reference originEntry},
+                                                       Path=IsFocused}"
+                                     Value="True">
+                    <Setter Property="Color" Value="Black" />
+                </DataTrigger>
+            </BoxView.Triggers>
+        </BoxView>
+        <BoxView WidthRequest="0.5"
+                       HorizontalOptions="Center"
+                       VerticalOptions="FillAndExpand"
+                       Color="{StaticResource Gray-100}"/>
+        <BoxView HeightRequest="5"
+                       WidthRequest="5"
+                       Color="{StaticResource Gray-100}"
+                       x:Name="destionationView">
+            <BoxView.Triggers>
+                <DataTrigger TargetType="BoxView"
+                                     Binding="{Binding Source={x:Reference destinationEntry},
+                                                       Path=IsFocused}"
+                                     Value="True">
+                    <Setter Property="Color" Value="Black" />
+                </DataTrigger>
+            </BoxView.Triggers>
+        </BoxView>
+    </StackLayout>
+
+    <Entry Placeholder="Enter Pickup"
+               Grid.Row="1" 
+               Grid.Column="1"
+               Grid.ColumnSpan="2"
+               Text="Parada Av.Independencia"
+               x:Name="originEntry"
+               ReturnType="Search"
+               HorizontalOptions="FillAndExpand" />
+
+    <Entry Placeholder="Where to?"
+               Grid.Row="2"
+               Grid.Column="1"
+               Grid.ColumnSpan="2"
+               Text="C11C10 - Av. Abraham Lincoln"
+               x:Name="destinationEntry"
+               ReturnType="Search"
+               HorizontalOptions="FillAndExpand" />
+</Grid>

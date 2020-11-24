@@ -8,7 +8,7 @@
              xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
              xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" 
              xmlns:controls="clr-namespace:HeatApp.Controls" 
-             xmlns:viewModel1="clr-namespace:HeatApp.ViewModels.Dashboard"
+             xmlns:viewModel1="clr-namespace:HeatApp.ViewModels.Dashboard" xmlns:local="clr-namespace:HeatApp.Views.HeatViews.Map"
              NavigationPage.HasBackButton="False"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.BindingContext>
@@ -21,13 +21,17 @@
 
         <maps:Map x:Name="map" 
                   Grid.Row="0"
-                  MapType="Street"
                   InitialCameraUpdate="18.472384,-69.921611,18"
                   PinClicked="Map_PinClicked"
                   VerticalOptions="FillAndExpand" />
 
+        <local:SearchHeaderView IsVisible="false"
+                                x:Name="headerSearch"
+                                Grid.Row="0" />
+
         <buttons:SfButton Grid.Row="0"
                           Margin="20,45"
+                          x:Name="btnMenu"
                           Style="{StaticResource PrimaryOutlineButtonStyle}"
                           FontFamily="{StaticResource FontIcons}"
                           Text="{StaticResource Menu}"
@@ -36,7 +40,7 @@
                           CornerRadius="25" 
                           HeightRequest="50" 
                           WidthRequest="50"
-                          Clicked="SfButton_Clicked">    
+                          Clicked="SfButton_Clicked">
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup x:Name="CommonStates">
                     <VisualState x:Name="Normal">
@@ -62,7 +66,7 @@
                               Style="{StaticResource PrimaryButtonStyle}"
                               FontFamily="{StaticResource FontIcons}"
                               Text="{StaticResource MapPin}"
-                              VerticalOptions="Start"
+                              VerticalOptions="Center"
                               HorizontalOptions="End" 
                               CornerRadius="25" 
                               HeightRequest="50" 
@@ -89,6 +93,7 @@
         <StackLayout Grid.Row="0" 
                      Margin="20,40"
                      Spacing="15"
+                     x:Name="stkEntry"
                      VerticalOptions="EndAndExpand">
 
             <border:SfBorder BorderWidth="0" 
@@ -115,6 +120,7 @@
             </border:SfBorder>
 
             <listView:SfListView
+                x:Name="lstRoutes"
                 VerticalOptions="End"
                     Margin="0"                    
                     Padding="0"

@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HeatApp.Views.HeatViews.Routes.RoutePage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" 
+             xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" 
+             xmlns:controls="clr-namespace:HeatApp.Controls"
+             ios:Page.UseSafeArea="True"
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False"
+             Title="Rutas">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <SearchBar Grid.Row="0" BackgroundColor="Transparent" Placeholder="Buscar"/>
+
+            <StackLayout Grid.Row="1" 
+                         Spacing="0">
+                <listView:SfListView IsStickyHeader="True"
+                                     ItemsSource="{Binding RoutesFavorite}" 
+                                     ItemSpacing="10"
+                                     ItemSize="140">
+                    <listView:SfListView.LayoutManager>
+                        <listView:LinearLayout />
+                    </listView:SfListView.LayoutManager>
+                    <listView:SfListView.HeaderTemplate>
+                        <DataTemplate>
+                            <Grid ColumnSpacing="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                   FontSize="Title"
+                                   TextColor="{x:StaticResource SecondaryColor}"
+                                   FontFamily="{StaticResource FontIcons}"
+                                   Text="{StaticResource Rating}"/>
+                                <Label Grid.Column="1"
+                                   FontSize="Title"
+                                   TextColor="{x:StaticResource SecondaryColor}"
+                                   FontFamily="{StaticResource Montserrat-Bold}"
+                                   Text="Favoritas"/>
+                            </Grid>
+                        </DataTemplate>
+                    </listView:SfListView.HeaderTemplate>
+                    <listView:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <controls:CustomShadowFrame BackgroundColor="{x:StaticResource PrimaryDarkColor}"
+                                                        CornerRadius="10">
+                                <StackLayout Orientation="Horizontal"
+                                         Spacing="10">
+                                    <StackLayout Orientation="Horizontal" 
+                                             VerticalOptions="CenterAndExpand"
+                                             HorizontalOptions="CenterAndExpand"
+                                             Spacing="5">
+
+                                        <Label TextColor="White" 
+                                           VerticalOptions="Center"
+                                            FontFamily="{StaticResource Montserrat-Bold}" 
+                                            FontSize="26"
+                                           Margin="10,0"
+                                            Text="{Binding Code}"/>
+                                        <BoxView BackgroundColor="White"
+                                             VerticalOptions="Center"
+                                             WidthRequest="1"
+                                             HeightRequest="60"/>
+
+                                    </StackLayout>
+                                    <StackLayout Orientation="Vertical" 
+                                             VerticalOptions="CenterAndExpand"
+                                             HorizontalOptions="StartAndExpand"
+                                             Spacing="5">
+
+                                        <Label TextColor="White"
+                                           FontSize="12">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Desde: " FontFamily="{StaticResource Montserrat-Bold}" />
+                                                    <Span Text="{Binding From}" FontFamily="{StaticResource Montserrat-Regular}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <Label TextColor="White" 
+                                           FontSize="10">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Hasta: " FontFamily="{StaticResource Montserrat-Bold}" />
+                                                    <Span Text="{Binding To}" FontFamily="{StaticResource Montserrat-Regular}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Button BackgroundColor="White"
+                                            TextColor="{x:StaticResource AlternativeColor1}"
+                                            Text="Ver Detalle"
+                                            FontSize="15"
+                                            CornerRadius="10" 
+                                            HeightRequest="40" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </controls:CustomShadowFrame>
+                        </DataTemplate>
+                    </listView:SfListView.ItemTemplate>
+                </listView:SfListView>
+                
+                <listView:SfListView IsStickyHeader="True"
+                                     ItemsSource="{Binding RoutesSeen}" 
+                                     ItemSpacing="10"
+                                     ItemSize="140">
+                    <listView:SfListView.LayoutManager>
+                        <listView:LinearLayout />
+                    </listView:SfListView.LayoutManager>
+                    <listView:SfListView.HeaderTemplate>
+                        <DataTemplate>
+                            <Grid ColumnSpacing="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       FontSize="Title"
+                                       TextColor="{x:StaticResource SecondaryColor}"
+                                       FontFamily="{StaticResource FontIcons}"
+                                       Text="{StaticResource MapPin}"/>
+                                <Label Grid.Column="1"
+                                       FontSize="Title"
+                                       TextColor="{x:StaticResource SecondaryColor}"
+                                       FontFamily="{StaticResource Montserrat-Bold}"
+                                       Text="Historial"/>
+                            </Grid>
+                        </DataTemplate>
+                    </listView:SfListView.HeaderTemplate>
+                    <listView:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <controls:CustomShadowFrame BackgroundColor="{x:StaticResource AlternativeColor1}"
+                                                        CornerRadius="10">
+                                <StackLayout Orientation="Horizontal"
+                                         Spacing="10">
+                                    <StackLayout Orientation="Horizontal" 
+                                             VerticalOptions="CenterAndExpand"
+                                             HorizontalOptions="CenterAndExpand"
+                                             Spacing="5">
+
+                                        <Label TextColor="White" 
+                                           VerticalOptions="Center"
+                                            FontFamily="{StaticResource Montserrat-Bold}" 
+                                            FontSize="26"
+                                           Margin="10,0"
+                                            Text="{Binding Code}"/>
+                                        <BoxView BackgroundColor="White"
+                                             VerticalOptions="Center"
+                                             WidthRequest="1"
+                                             HeightRequest="60"/>
+
+                                    </StackLayout>
+                                    <StackLayout Orientation="Vertical" 
+                                             VerticalOptions="CenterAndExpand"
+                                             HorizontalOptions="StartAndExpand"
+                                             Spacing="5">
+
+                                        <Label TextColor="White"
+                                           FontSize="12">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Desde: " FontFamily="{StaticResource Montserrat-Bold}" />
+                                                    <Span Text="{Binding From}" FontFamily="{StaticResource Montserrat-Regular}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <Label TextColor="White" 
+                                           FontSize="10">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Hasta: " FontFamily="{StaticResource Montserrat-Bold}" />
+                                                    <Span Text="{Binding To}" FontFamily="{StaticResource Montserrat-Regular}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Button BackgroundColor="White"
+                                            TextColor="{x:StaticResource AlternativeColor1}"
+                                            Text="Ver Detalle"
+                                            FontSize="15"
+                                            CornerRadius="10" 
+                                            HeightRequest="40" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </controls:CustomShadowFrame>
+                        </DataTemplate>
+                    </listView:SfListView.ItemTemplate>
+                </listView:SfListView>
+            </StackLayout>
+        </Grid>
+
+        <buttons:SfButton Grid.Row="0"
+                          Margin="20,0"
+                          Style="{StaticResource PrimaryButtonStyle}"
+                          FontFamily="{StaticResource FontIcons}"
+                          Text="{StaticResource Close}"
+                          VerticalOptions="Start"
+                          HorizontalOptions="Start" 
+                          CornerRadius="25" 
+                          HeightRequest="50" 
+                          WidthRequest="50"
+                          Command="{Binding CloseModalCommand}">
+
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="Opacity" Value="1" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="Opacity" Value="0.5" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </buttons:SfButton>
+    </Grid>
+
+</ContentPage>
