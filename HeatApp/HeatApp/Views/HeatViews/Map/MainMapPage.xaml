@@ -32,6 +32,7 @@
         <buttons:SfButton Grid.Row="0"
                           Margin="20,45"
                           x:Name="btnMenu"
+                          HasShadow="False"
                           Style="{StaticResource PrimaryOutlineButtonStyle}"
                           FontFamily="{StaticResource FontIcons}"
                           Text="{StaticResource Menu}"
@@ -91,29 +92,30 @@
         </buttons:SfButton>
 
         <StackLayout Grid.Row="0" 
-                     Margin="20,40"
+                     Margin="0,40"
                      Spacing="15"
                      x:Name="stkEntry"
                      VerticalOptions="EndAndExpand">
 
             <border:SfBorder BorderWidth="0" 
                              HasShadow="True"
-                             ShadowColor="{DynamicResource PrimaryColor}"
+                             
                              VerticalOptions="End">
 
-                <inputLayout:SfTextInputLayout                          
+                <inputLayout:SfTextInputLayout
+                    Margin="16,0"
                             LeadingViewPosition="Inside"
                             ContainerType="Outlined"
                             ContainerBackgroundColor="White"
-                            UnfocusedColor="{DynamicResource PrimaryColor}"
-                            FocusedColor="{StaticResource SecondaryColor}"
+                            UnfocusedColor="Transparent"
+                            FocusedColor="Transparent"
                             OutlineCornerRadius="5"
                             HeightRequest="50">
 
-                    <Entry TextColor="{DynamicResource PrimaryColor}" Placeholder="¿A donde ir?"/>
+                    <Entry TextColor="#333" Placeholder="¿A donde ir?"/>
 
                     <inputLayout:SfTextInputLayout.LeadingView>
-                        <Label TextColor="{DynamicResource PrimaryColor}" FontFamily="{StaticResource FontIcons}" Text="{StaticResource Search}"/>
+                        <Label VerticalTextAlignment="Center" TextColor="DarkGray" FontFamily="{StaticResource FontIcons}" Text="{StaticResource Search}"/>
                     </inputLayout:SfTextInputLayout.LeadingView>
                 </inputLayout:SfTextInputLayout>
 
@@ -143,7 +145,7 @@
                             <controls:CustomShadowFrame
                                 Margin="8"
                                 Padding="0"
-                                HasShadow="true"
+                                HasShadow="false"
                                 WidthRequest="230"
                                  BackgroundColor="{Binding BackgroundGradientStart}">
                                 <Grid>

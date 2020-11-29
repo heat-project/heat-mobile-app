@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
@@ -34,8 +35,10 @@ namespace HeatApp.Views.HeatViews.Common
         {
             InitializeComponent();
             map.Pins.Clear();
+            AddMapStyle();
             GetPostionsForRoute();
             this.rootPage = rootPage;
+            
         }
         protected override async void OnAppearing()
         {
@@ -106,6 +109,20 @@ namespace HeatApp.Views.HeatViews.Common
             map.Polylines.Add(polyline);
             map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(polyline.Positions[1].Latitude, polyline.Positions[1].Longitude), Xamarin.Forms.GoogleMaps.Distance.FromMiles(0.34f)));
         }
+
+        private void AddMapStyle()
+        {
+            var assembly = typeof(MainPage).GetTypeInfo().Assembly;
+            var stream = assembly.GetManifestResourceStream($"HeatApp.MapStyle.json");
+            string styleFile;
+            using (var reader = new System.IO.StreamReader(stream))
+            {
+                styleFile = reader.ReadToEnd();
+            }
+
+            map.MapStyle = MapStyle.FromJson(styleFile);
+        }
+
         private void GetPostionsForRoute()
         {
             positions.Add(new Position(18.484200, -69.939930));
