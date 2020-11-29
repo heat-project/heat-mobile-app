@@ -51,15 +51,15 @@
                        TextColor="{StaticResource PrimaryColor}"
                        FontFamily="{StaticResource Montserrat-Bold}"
                        Style="{StaticResource LabelStyle}"
-                       FontSize="50"
-                       HorizontalTextAlignment="Center"
+                       FontSize="42"
+                       HorizontalTextAlignment="Start"
                        Text="Registrarse"
                        LineBreakMode="WordWrap" />
                     <ScrollView Grid.Row="2">
                         <StackLayout Spacing="0" 
                                      Margin="10">
 
-                            <control:ValidationEntryView PlaceHolder="Nombres" 
+                            <control:ValidationEntryView PlaceHolder="Nombres"
                                                      Text="{Binding FirstName.Value}"                                           
                                                      FontFamily="{StaticResource FontIcons}"
                                                      IsValid="{Binding FirstName.IsValid}"
@@ -115,7 +115,7 @@
                             <control:ValidationEntryView PlaceHolder="Confirmar Contraseña" 
                                                      Text="{Binding Password.Item2.Value}"
                                                      IsValid="{Binding Password.Item2.IsValid}"
-                                                     IsPassword="True" 
+                                                     IsPassword="True"
                                                      FontFamily="{StaticResource FontIcons}" 
                                                      Icon="{StaticResource Password}"/>
 
@@ -132,8 +132,10 @@
                                           Style="{StaticResource PrimaryOutlineButtonStyle}"
                                           Command="{Binding SignUpCommand}"
                                           IsEnabled="{Binding IsNotBusy}"
+                                          HasShadow="False"
                                           Text="REGISTRARSE"
-                                          HorizontalOptions="FillAndExpand">
+                                          HorizontalOptions="FillAndExpand"
+                                          VerticalOptions="EndAndExpand">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal">
@@ -164,7 +166,8 @@
                           VerticalOptions="Start"
                           HorizontalOptions="Start" 
                           CornerRadius="25" 
-                          HeightRequest="50" 
+                          HeightRequest="50"
+                          HasShadow="False"
                           WidthRequest="50"
                           Clicked="SfButton_Clicked">
             <VisualStateManager.VisualStateGroups>
