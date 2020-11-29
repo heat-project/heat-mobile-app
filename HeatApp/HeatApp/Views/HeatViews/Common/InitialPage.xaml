@@ -44,14 +44,16 @@
                        FontFamily="{StaticResource Montserrat-SemiBold}"
                        FontSize="26"
                        HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="End"
                        Style="{StaticResource LabelStyle}"
                        Text="Su compañero de viaje en la ciudad en tiempo real"
                        LineBreakMode="WordWrap"
                        TextColor="{DynamicResource Gray-700}" />
 
-                <StackLayout VerticalOptions="EndAndExpand" Grid.Row="2" Spacing="0">
+                <StackLayout VerticalOptions="End" Grid.Row="3" Spacing="0">
                     <buttons:SfButton
                         Margin="0,16"
+                        HasShadow="False"
                         Style="{StaticResource PrimaryButtonStyle}"
                         Text="INICIAR SESIÓN"
                         Command="{Binding GoToLoginCommand}"
@@ -81,6 +83,7 @@
                         Margin="0,16"
                         Style="{StaticResource PrimaryOutlineButtonStyle}"
                         Text="REGISTRARSE"
+                        HasShadow="False"
                         Command="{Binding GoToSignUpCommand}"
                         HorizontalOptions="FillAndExpand"/>
                 </StackLayout>

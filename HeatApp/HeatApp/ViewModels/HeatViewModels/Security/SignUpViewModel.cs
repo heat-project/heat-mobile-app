@@ -23,7 +23,7 @@ namespace HeatApp.ViewModels
         }
         #endregion
 
-        #region Propertties
+        #region Properties
         private ISecurityService SecurityService { get; set; }
         public ICommand SignUpCommand { get; set; }
         public ValidatableObject<string> FirstName { get; set; } = new ValidatableObject<string>();
@@ -35,7 +35,7 @@ namespace HeatApp.ViewModels
         #endregion
 
         #region Methods
-        public async Task SingUp()
+        public async Task SignUp()
         {
             if (IsBusy) return;
             StartBusy();
@@ -85,7 +85,7 @@ namespace HeatApp.ViewModels
         }
         private void SetCommands()
         {
-            SignUpCommand = new Command(async () => await SingUp());
+            SignUpCommand = new Command(async () => await SignUp());
         }
         private void SetServices()
         {

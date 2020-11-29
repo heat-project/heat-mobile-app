@@ -1,4 +1,5 @@
-﻿using HeatApp.Views.HeatViews.Common;
+﻿using HeatApp.ViewModels.HeatViewModels.Security;
+using HeatApp.Views.HeatViews.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace HeatApp.Views.HeatViews
         public LoginPage()
         {
             InitializeComponent();
+            BindingContext = new LoginViewModel(Navigation);
         }
 
         private async void SfButton_Clicked(object sender, EventArgs e)
