@@ -276,7 +276,8 @@
         <StackLayout VerticalOptions="EndAndExpand" Margin="10,0" Grid.Row="0" Spacing="0">
             <buttons:SfButton Style="{StaticResource PrimaryButtonStyle}"
                               Text="SEGUIR RUTA"
-                              HorizontalOptions="FillAndExpand"/>
+                              HorizontalOptions="FillAndExpand"
+                              Clicked="SfButton_Clicked_1"/>
         </StackLayout>
 
         <buttons:SfButton Margin="20,0"

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using HeatApp.Views.HeatViews.Bus;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
@@ -33,7 +35,6 @@ namespace HeatApp.Views.HeatViews.Common
         public MainMapPage(RootPage rootPage)
         {
             InitializeComponent();
-            map.Pins.Clear();
             GetPostionsForRoute();
             this.rootPage = rootPage;
         }
@@ -128,8 +129,8 @@ namespace HeatApp.Views.HeatViews.Common
         {
             e.Handled = true;
 
-            //Navigation.PushModalAsync(new NavigationPage(new BusProfilePage()));
-            await MoveBus();
+            await Navigation.PushModalAsync(new NavigationPage(new BusProfilePage(MoveBus)));
+            //await MoveBus();
         }
         private async void myLocation_Clicked(object sender, EventArgs e)
         {
@@ -140,8 +141,11 @@ namespace HeatApp.Views.HeatViews.Common
             btnMenu.IsVisible = true;
             stkEntry.IsVisible = true;
         }
-        private async Task MoveBus()
+        private async void MoveBus()
         {
+            map.Pins.Clear();
+            map.Pins.Add(buspin);
+            myLocation.IsVisible = true;
             foreach (var position in busPositions)
             {
                 var lastPor = buspin.Position;
@@ -149,7 +153,7 @@ namespace HeatApp.Views.HeatViews.Common
                 animation.Commit(this, "PinAnimation", 300, 10000, Easing.SinInOut, null, () => false);
                 buspin.Rotation = (float)DegreeBearing(lastPor.Latitude, lastPor.Longitude, buspin.Position.Latitude, buspin.Position.Longitude);
                 await map.MoveCamera(CameraUpdateFactory.NewPosition(buspin.Position));
-                await Task.Delay(100);
+                await Task.Delay(300);
             }
         }
         double DegreeBearing(
@@ -179,6 +183,17 @@ namespace HeatApp.Views.HeatViews.Common
             // convert radians to degrees (as bearing: 0...360)
             return (ToDegrees(radians) + 360) % 360;
         }
+        void AddMapStyle()
+        {
+            var assembly = typeof(App).GetTypeInfo().Assembly;
+            var stream = assembly.GetManifestResourceStream($"HeatApp.MapStyle.json");
+            string styleFile;
+            using (var reader = new System.IO.StreamReader(stream))
+            {
+                styleFile = reader.ReadToEnd();
+            }
 
+            map.MapStyle = MapStyle.FromJson(styleFile);
+        }
     }
 }

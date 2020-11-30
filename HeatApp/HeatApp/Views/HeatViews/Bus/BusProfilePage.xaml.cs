@@ -12,13 +12,21 @@ namespace HeatApp.Views.HeatViews.Bus
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BusProfilePage : ContentPage
     {
-        public BusProfilePage()
+        private Action FollowRoute;
+        public BusProfilePage(Action followRoute)
         {
             InitializeComponent();
+            FollowRoute = followRoute;
         }
         private async void SfButton_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync();
+        }
+
+        private async void SfButton_Clicked_1(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync();
+            FollowRoute();
         }
     }
 }
