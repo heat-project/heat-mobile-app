@@ -1,7 +1,8 @@
-﻿using HeatApp.Views.HeatViews.Bus;
+﻿using HeatApp.ViewModels.Heat;
+using HeatApp.Views.HeatViews.Bus;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -32,14 +33,16 @@ namespace HeatApp.Views.HeatViews.Common
         };
         RootPage rootPage;
         Pin buspin;
+        MainMapViewModel viewModel;
         public MainMapPage(RootPage rootPage)
         {
             InitializeComponent();
             map.Pins.Clear();
+            viewModel = new MainMapViewModel(Navigation, map);
+            BindingContext = viewModel;
             AddMapStyle();
             GetPostionsForRoute();
             this.rootPage = rootPage;
-            
         }
         protected override async void OnAppearing()
         {
@@ -52,9 +55,9 @@ namespace HeatApp.Views.HeatViews.Common
             {
                 map.Polylines.Clear();
 
-                var latitude = 18.472384;
-                var longitude = -69.921611;
-                var defaultPin = new Pin
+                double latitude = 18.472384;
+                double longitude = -69.921611;
+                Pin defaultPin = new Pin
                 {
                     Icon = BitmapDescriptorFactory.FromBundle("user_marker"),
                     Label = "This is my home",
@@ -70,10 +73,9 @@ namespace HeatApp.Views.HeatViews.Common
                     Rotation = (float)DegreeBearing(18.471061, -69.922200, 18.471896, -69.921201)
                 };
 
-
                 map.Pins.Add(defaultPin);
                 map.Pins.Add(buspin);
-                var newBoundsArea = CameraUpdateFactory.NewPositionZoom(new Position(buspin.Position.Latitude, buspin.Position.Longitude), 18);
+                CameraUpdate newBoundsArea = CameraUpdateFactory.NewPositionZoom(new Position(buspin.Position.Latitude, buspin.Position.Longitude), 18);
                 await map.MoveCamera(newBoundsArea);
 
             }
@@ -87,36 +89,69 @@ namespace HeatApp.Views.HeatViews.Common
             rootPage.IsPresented = !rootPage.IsPresented;
             //GetCurrentLocation();
         }
-        private void DrawRoute()
+        private void DrawRoute(List<Position> positions = null)
         {
             map.Polylines.Clear();
-            var polyline = new Xamarin.Forms.GoogleMaps.Polyline();
+            Polyline polyline = new Polyline();
             polyline.StrokeColor = Color.FromHex("#F4A32C");
             polyline.StrokeWidth = 6;
 
             foreach (var p in positions)
             {
                 polyline.Positions.Add(p);
+            }
 
-                var pinC = new Pin
+            var positionD = new Position(positions.LastOrDefault().Latitude, positions.LastOrDefault().Longitude);
+            var positionO = new Position(positions.FirstOrDefault().Latitude, positions.FirstOrDefault().Longitude);
+            polyline.Positions.Add(positionD);
+            Pin pinC = new Pin
+            {
+                Icon = BitmapDescriptorFactory.FromBundle("bus_station"),
+                Position = positionD,
+                Label = "Parada Destino"
+            };
+            map.Pins.Add(pinC);
+            Pin pinD = new Pin
+            {
+                Icon = BitmapDescriptorFactory.FromBundle("user_marker"),
+                Position = positionO,
+                Label = "Origen"
+            };
+            map.Pins.Add(pinD);
+
+            map.Polylines.Add(polyline);
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(polyline.Positions[0].Latitude, polyline.Positions[0].Longitude), Xamarin.Forms.GoogleMaps.Distance.FromMiles(0.50f)));
+        }
+        private void DrawRoute()
+        {
+            map.Polylines.Clear();
+            Polyline polyline = new Polyline();
+            polyline.StrokeColor = Color.FromHex("#F4A32C");
+            polyline.StrokeWidth = 6;
+
+            foreach (var stop in viewModel.Stops)
+            {
+                Position position = new Position(stop.Latitude, stop.Longitude);
+                polyline.Positions.Add(position);
+                Pin pinC = new Pin
                 {
-                    Type = PinType.SearchResult,
-                    Position = new Position(p.Latitude, p.Longitude),
-                    Label = "Pin",
-                    Address = "Pin"
+                    Icon = BitmapDescriptorFactory.FromBundle("bus_station"),
+                    Position = position,
+                    Label = stop.Title,
+                    Address = stop.Description
                 };
                 map.Pins.Add(pinC);
             }
             map.Polylines.Add(polyline);
-            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(polyline.Positions[1].Latitude, polyline.Positions[1].Longitude), Xamarin.Forms.GoogleMaps.Distance.FromMiles(0.34f)));
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(polyline.Positions[0].Latitude, polyline.Positions[0].Longitude), Xamarin.Forms.GoogleMaps.Distance.FromMiles(0.34f)));
         }
 
         private void AddMapStyle()
         {
-            var assembly = typeof(MainPage).GetTypeInfo().Assembly;
-            var stream = assembly.GetManifestResourceStream($"HeatApp.MapStyle.json");
+            Assembly assembly = typeof(MainPage).GetTypeInfo().Assembly;
+            System.IO.Stream stream = assembly.GetManifestResourceStream($"HeatApp.MapStyle.json");
             string styleFile;
-            using (var reader = new System.IO.StreamReader(stream))
+            using (System.IO.StreamReader reader = new System.IO.StreamReader(stream))
             {
                 styleFile = reader.ReadToEnd();
             }
@@ -131,6 +166,16 @@ namespace HeatApp.Views.HeatViews.Common
             positions.Add(new Position(18.483360, -69.934910));
             positions.Add(new Position(18.484400, -69.936020));
         }
+
+        private async Task ShowNearStopRoute()
+        {
+            double latitude = 18.472384;
+            double longitude = -69.921611;
+            double latitude2 = viewModel.Stops.LastOrDefault().Latitude;
+            double longitude2 = viewModel.Stops.LastOrDefault().Longitude;
+
+            DrawRoute(await viewModel.GetRouteToStop(new Position(latitude, longitude), new Position(latitude2, longitude2)));
+        }
         private void SfListView_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
         {
             headerSearch.IsVisible = true;
@@ -138,6 +183,8 @@ namespace HeatApp.Views.HeatViews.Common
             btnMenu.IsVisible = false;
             stkEntry.IsVisible = false;
             myLocation.IsVisible = true;
+            followRoute.IsVisible = true;
+            map.Pins.Clear();
             DrawRoute();
         }
         // Do NOT mark async method.
@@ -147,12 +194,12 @@ namespace HeatApp.Views.HeatViews.Common
             e.Handled = true;
 
             await Navigation.PushModalAsync(new NavigationPage(new BusProfilePage(MoveBus)));
-            //await MoveBus();
         }
         private async void myLocation_Clicked(object sender, EventArgs e)
         {
             await GetCurrentLocation();
             myLocation.IsVisible = false;
+            followRoute.IsVisible = false;
             headerSearch.IsVisible = false;
             lstRoutes.IsVisible = true;
             btnMenu.IsVisible = true;
@@ -163,54 +210,42 @@ namespace HeatApp.Views.HeatViews.Common
             map.Pins.Clear();
             map.Pins.Add(buspin);
             myLocation.IsVisible = true;
-            foreach (var position in busPositions)
+            foreach (Position position in busPositions)
             {
-                var lastPor = buspin.Position;
-                var animation = new Animation(a => buspin.Position = new Position(position.Latitude, position.Longitude), 1, 2);
+                Position lastPor = buspin.Position;
+                Animation animation = new Animation(a => buspin.Position = new Position(position.Latitude, position.Longitude), 1, 2);
                 animation.Commit(this, "PinAnimation", 300, 10000, Easing.SinInOut, null, () => false);
                 buspin.Rotation = (float)DegreeBearing(lastPor.Latitude, lastPor.Longitude, buspin.Position.Latitude, buspin.Position.Longitude);
                 await map.MoveCamera(CameraUpdateFactory.NewPosition(buspin.Position));
                 await Task.Delay(300);
             }
         }
-        double DegreeBearing(
-            double lat1, double lon1,
-            double lat2, double lon2)
+        double DegreeBearing(double lat1, double lon1, double lat2, double lon2)
         {
-            var dLon = ToRad(lon2 - lon1);
-            var dPhi = Math.Log(
+            double dLon = ToRad(lon2 - lon1);
+            double dPhi = Math.Log(
                 Math.Tan(ToRad(lat2) / 2 + Math.PI / 4) / Math.Tan(ToRad(lat1) / 2 + Math.PI / 4));
             if (Math.Abs(dLon) > Math.PI)
                 dLon = dLon > 0 ? -(2 * Math.PI - dLon) : (2 * Math.PI + dLon);
             return ToBearing(Math.Atan2(dLon, dPhi));
         }
-
         public static double ToRad(double degrees)
         {
             return degrees * (Math.PI / 180);
         }
-
         public static double ToDegrees(double radians)
         {
             return radians * 180 / Math.PI;
         }
-
         public static double ToBearing(double radians)
         {
             // convert radians to degrees (as bearing: 0...360)
             return (ToDegrees(radians) + 360) % 360;
         }
-        void AddMapStyle()
+        private async void followRoute_Clicked(object sender, EventArgs e)
         {
-            var assembly = typeof(App).GetTypeInfo().Assembly;
-            var stream = assembly.GetManifestResourceStream($"HeatApp.MapStyle.json");
-            string styleFile;
-            using (var reader = new System.IO.StreamReader(stream))
-            {
-                styleFile = reader.ReadToEnd();
-            }
-
-            map.MapStyle = MapStyle.FromJson(styleFile);
+            map.Pins.Clear();
+            await ShowNearStopRoute();
         }
     }
 }

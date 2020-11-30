@@ -23,7 +23,7 @@ namespace HeatApp.ViewModels.Forms
         /// </summary>
         public LoginPageViewModel()
         {
-            this.LoginCommand = new Command(this.LoginCommand);
+            //this.LoginCommand = new Command(this.LoginCommand);
             this.SignUpCommand = new Command(this.SignUpClicked);
             this.ForgotPasswordCommand = new Command(this.ForgotPasswordClicked);
             this.SocialMediaLoginCommand = new Command(this.SocialLoggedIn);

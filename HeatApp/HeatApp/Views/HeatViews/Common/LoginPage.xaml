@@ -128,9 +128,7 @@
                         Text="INICIAR SESIÓN"
                             VerticalOptions="EndAndExpand"
                         HorizontalOptions="FillAndExpand"
-                        Command="{Binding LoginCommand}"
-                        <!--    Clicked="Login_Clicked" -->
-                        >
+                            Clicked="Login_Clicked">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal">

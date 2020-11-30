@@ -11,9 +11,7 @@
              xmlns:viewModel1="clr-namespace:HeatApp.ViewModels.Dashboard" xmlns:local="clr-namespace:HeatApp.Views.HeatViews.Map"
              NavigationPage.HasBackButton="False"
              NavigationPage.HasNavigationBar="False">
-    <ContentPage.BindingContext>
-        <viewModel1:HealthCareViewModel />
-    </ContentPage.BindingContext>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -90,6 +88,39 @@
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
         </buttons:SfButton>
+
+        <buttons:SfButton Grid.Row="0"
+                              x:Name="followRoute"
+                              FontSize="25"
+                              IsVisible="False"
+                              Margin="20,65"
+                              Style="{StaticResource PrimaryButtonStyle}"
+                              FontFamily="{StaticResource FontIcons}"
+                              Text="{StaticResource Sort}"
+                              VerticalOptions="End"
+                              HorizontalOptions="End" 
+                              CornerRadius="25" 
+                              HeightRequest="50" 
+                              WidthRequest="50"
+                              Clicked="followRoute_Clicked">
+
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="Opacity" Value="1" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="Opacity" Value="0.5" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </buttons:SfButton>
+
 
         <StackLayout Grid.Row="0" 
                      Margin="0,40"

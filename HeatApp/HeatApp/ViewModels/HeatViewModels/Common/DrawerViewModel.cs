@@ -1,4 +1,5 @@
-﻿using HeatApp.Views.HeatViews.Routes;
+﻿using HeatApp.Views.HeatViews.Common;
+using HeatApp.Views.HeatViews.Routes;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -36,11 +37,11 @@ namespace HeatApp.ViewModels.HeatViewModels.Common
             {
                 new ProfileModel { Name = "Rutas", ImagePath = "routes.png" },
                 new ProfileModel { Name = "Ayuda", ImagePath = "help.png" },
-                new ProfileModel { Name = "Notificaciones", ImagePath = "notif.png" },
                 new ProfileModel { Name = "Configuraciones", ImagePath = "settings.png" },
             };
 
             MenuItemTapCommand = new Command<ProfileModel>(async (profile) => await OnMenuItemTapped(profile));
+            LogOutCommand = new Command(LogOut);
         }
 
         #endregion
@@ -50,7 +51,7 @@ namespace HeatApp.ViewModels.HeatViewModels.Common
         /// Gets or sets the command that is executed when the profile item is tapped.
         /// </summary>
         public ICommand MenuItemTapCommand { get; set; }
-
+        public ICommand LogOutCommand { get; set; }
         #endregion
 
         #region Properties
@@ -166,8 +167,14 @@ namespace HeatApp.ViewModels.HeatViewModels.Common
                 case "Rutas":
                     await navigation.PushModalAsync(new RoutePage());
                     break;
+                case "Configuraciones":
+                    await navigation.PushModalAsync(new ConfigPage());
+                    break;
             }
-
+        }
+        private void LogOut()
+        {
+            App.Current.MainPage = new NavigationPage(new InitialPage());
         }
         #endregion
     }

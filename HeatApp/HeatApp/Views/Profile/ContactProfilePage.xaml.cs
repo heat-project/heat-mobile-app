@@ -13,7 +13,7 @@ namespace HeatApp.Views.Profile
         public ContactProfilePage()
         {
             InitializeComponent();
-            this.ProfileImage.Source = App.BaseImageUrl + "ContactProfileImage.png";
+            //this.ProfileImage.Source = App.BaseImageUrl + "ContactProfileImage.png";
         }
     }
 }

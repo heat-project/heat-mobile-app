@@ -8,6 +8,7 @@ namespace HeatApp
     {
         #region Properties
         public const string UrlAPI = "https://heatapi.softcorpapp.com/";
+        public const string GoogleMapsAPIKey = "AIzaSyD2ZjqBONONbEATiZT8yX97iwm2biuJI5o";
         #endregion
 
         #region Messages

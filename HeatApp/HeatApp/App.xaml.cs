@@ -23,7 +23,6 @@ namespace HeatApp
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzE4NzkyQDMxMzgyZTMyMmUzMEpENWQ0ZXM5WXpWc2hyNW1xNXI0OUYveU9Fd3VWS21KQ0xqZHZBdnRiNWc9");
             SetServices();
             MainPage = new NavigationPage(new InitialPage());
-            //MainPage = new NavigationPage(new ArticleCardPage());
         }
 
         protected override void OnStart()
@@ -43,6 +42,9 @@ namespace HeatApp
         {
             DependencyService.Register<ISecurityService, SecurityService>();
             DependencyService.Register<IRouteService, RouteService>();
+            DependencyService.Register<IBusService, BusService>();
+            DependencyService.Register<IGoogleMapsApiService, GoogleMapsApiService>();
+            GoogleMapsApiService.Initialize(Constants.GoogleMapsAPIKey);
         }
         #endregion
     }

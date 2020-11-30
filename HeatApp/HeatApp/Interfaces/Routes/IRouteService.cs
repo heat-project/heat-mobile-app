@@ -11,5 +11,6 @@ namespace HeatApp.Interfaces.Routes
         Task<List<RouteDTO>> GetFavorites();
         Task<List<RouteDTO>> GetAll();
         Task<List<RouteDTO>> GetPreviouslySeen();
+        Task<List<StopDTO>> GetStops(int routeID);
     }
 }

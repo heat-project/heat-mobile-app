@@ -107,6 +107,5 @@ namespace HeatApp.Helpers
 
             return str.ToString();
         }
-
     }
 }
