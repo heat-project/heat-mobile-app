@@ -31,6 +31,8 @@
     <None Remove="Images\SleepDuration.svg" />
     <None Remove="Images\SomethingWentWrong.svg" />
     <None Remove="Images\WaterConsumed.svg" />
+    <None Remove="Views\HeatViews\Map\MapStyle.json" />
+    <None Remove="MapStyle.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,6 +56,7 @@
     <EmbeddedResource Include="Images\SleepDuration.svg" />
     <EmbeddedResource Include="Images\SomethingWentWrong.svg" />
     <EmbeddedResource Include="Images\WaterConsumed.svg" />
+    <EmbeddedResource Include="MapStyle.json" />
   </ItemGroup>
 
   <ItemGroup>

@@ -6,7 +6,7 @@
              xmlns:behaviour="clr-namespace:HeatApp.Behaviors"
              x:Class="HeatApp.Views.HeatViews.Controls.ValidationEntryView">
     <border:SfBorder  BorderWidth="0" 
-                      HasShadow="True"
+                      HasShadow="False"
                       ShadowColor="{DynamicResource Gray-600}">
 
         <inputLayout:SfTextInputLayout LeadingViewPosition="Inside"

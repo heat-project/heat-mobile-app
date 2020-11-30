@@ -16,7 +16,6 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidUseAapt2>true</AndroidUseAapt2>
@@ -174,7 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HeatApp\HeatApp.csproj">
-      <Project>{E5BF8E18-EB78-487E-B3E0-ED26CE336B69}</Project>
+      <Project>{37D1C105-F4B4-484B-88FB-74622A39C0BD}</Project>
       <Name>HeatApp</Name>
     </ProjectReference>
   </ItemGroup>
