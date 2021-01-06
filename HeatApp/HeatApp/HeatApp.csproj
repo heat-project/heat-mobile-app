@@ -327,5 +327,7 @@
   <ItemGroup>
     <Folder Include="Models\HeatModels\Common\" />
     <Folder Include="ViewModels\HeatViewModels\Menu\" />
+    <Folder Include="Services\Map\" />
+    <Folder Include="Interfaces\Map\" />
   </ItemGroup>
 </Project>

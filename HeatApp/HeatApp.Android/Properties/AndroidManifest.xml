@@ -2,10 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.heatapp" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
 	<application android:label="HeatApp.Android" android:theme="@style/MainTheme" android:icon="@drawable/icon"></application>
-  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-  <uses-permission android:name="android.permission.INTERNET" />
-  <meta-data android:name="com.google.android.geo.API_KEY"
-android:value="AIzaSyD2ZjqBONONbEATiZT8yX97iwm2biuJI5o"/>
-  <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyD2ZjqBONONbEATiZT8yX97iwm2biuJI5o" />
+	<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 </manifest>

@@ -1,13 +1,16 @@
 ﻿using HeatApp.Helpers;
 using HeatApp.Interfaces;
+using HeatApp.Interfaces.Map;
 using HeatApp.Interfaces.Routes;
 using HeatApp.Models;
 using HeatApp.Models.Dashboard;
 using HeatApp.Models.HeatModels;
+using HeatApp.Views.HeatViews.Common;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -29,6 +32,7 @@ namespace HeatApp.ViewModels.Heat
         #region Services
         private IRouteService RouteService;
         private IGoogleMapsApiService GoogleMapsService;
+        private IMapService MapService;
         #endregion
 
         #region Propertties
@@ -44,11 +48,47 @@ namespace HeatApp.ViewModels.Heat
             get => buses;
             set => SetProperty(ref buses, value);
         }
-        private ObservableCollection<HealthCare> cardItems = new ObservableCollection<HealthCare>();
-        public ObservableCollection<HealthCare> CardItems
+        private ObservableCollection<RouteDTO> cardItems = new ObservableCollection<RouteDTO>();
+        public ObservableCollection<RouteDTO> CardItems
         {
             get => cardItems;
             set => SetProperty(ref cardItems, value);
+        }
+
+        private bool showHeaderSearch = false;
+        public bool ShowHeaderSearch
+        {
+            get => showHeaderSearch;
+            set => SetProperty(ref showHeaderSearch, value);
+
+        }
+
+        private bool showRoutes = false;
+        public bool ShowRoutes
+        {
+            get => showRoutes;
+            set => SetProperty(ref showRoutes, value);
+        }
+
+        private bool showMenu = false;
+        public bool ShowMenu
+        {
+            get => showMenu;
+            set => SetProperty(ref showMenu, value);
+        }
+
+        private bool showLocation = false;
+        public bool ShowLocation
+        {
+            get => showLocation;
+            set => SetProperty(ref showLocation, value);
+        }
+
+        private bool showFollowRoute = false;
+        public bool ShowFollowRoute
+        {
+            get => showFollowRoute;
+            set => SetProperty(ref showFollowRoute, value);
         }
         #endregion
 
@@ -57,51 +97,45 @@ namespace HeatApp.ViewModels.Heat
         {
             RouteService = DependencyService.Get<IRouteService>();
             GoogleMapsService = DependencyService.Get<IGoogleMapsApiService>();
+            MapService = DependencyService.Get<IMapService>();
         }
-        private void GetRoute()
+        private async void GetRoute()
         {
-            CardItems = new ObservableCollection<HealthCare>()
+            try
             {
-                new HealthCare()
-                {
-                    Category = "HEART RATE",
-                    CategoryValue = "87 bmp",
-                    BackgroundGradientStart = "#F4A32C",
-                },
-                new HealthCare()
-                {
-                    Category = "CALORIES BURNED",
-                    CategoryValue = "948 cal",
-                    BackgroundGradientStart = "#ED694A"
-                },
-                new HealthCare()
-                {
-                    Category = "SLEEP TIME",
-                    CategoryValue = "7.3 hrs",
-                    BackgroundGradientStart = "#F4D44E"
-                },
-                new HealthCare()
-                {
-                    Category = "WATER CONSUMED",
-                    CategoryValue = "38.6 ltr",
-                    BackgroundGradientStart = "#006992"
-                }
-            };
+                CardItems = new ObservableCollection<RouteDTO>(await RouteService.GetAll());
+            }
+            catch (HttpRequestException)
+            {
+                App.Current.MainPage = new NavigationPage(new InitialPage());
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
         private async void GetStops(Map map)
         {
-            Stops = new ObservableCollection<StopDTO>(await RouteService.GetStops(1));
-            foreach (var item in Stops)
+            try
             {
-                var pin = new Pin
+                Stops = new ObservableCollection<StopDTO>(await RouteService.GetStops());
+                foreach (var item in Stops)
                 {
-                    Icon = BitmapDescriptorFactory.FromBundle("bus_station"),
-                    Label = item.Title,
-                    Address = item.Description,
-                    Position = new Position(item.Latitude, item.Longitude)
-                };
-                map.Pins.Add(pin);
+                    var pin = new Pin
+                    {
+                        Icon = BitmapDescriptorFactory.FromBundle("bus_station"),
+                        Label = item.Title,
+                        Address = item.Description,
+                        Position = new Position(item.Latitude, item.Longitude)
+                    };
+                    map.Pins.Add(pin);
+                }
             }
+            catch (HttpRequestException)
+            {
+                App.Current.MainPage = new NavigationPage(new InitialPage());
+            }
+            catch (Exception) { }
         }
         public async Task<List<Position>> GetRouteToStop(Position origin, Position destination)
         {

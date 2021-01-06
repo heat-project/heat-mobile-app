@@ -1,4 +1,7 @@
-﻿using HeatApp.ViewModels.Heat;
+﻿using HeatApp.Helpers;
+using HeatApp.Interfaces;
+using HeatApp.Models.HeatModels;
+using HeatApp.ViewModels.Heat;
 using HeatApp.Views.HeatViews.Bus;
 using System;
 using System.Collections.Generic;
@@ -7,11 +10,14 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
+using Polyline = Xamarin.Forms.GoogleMaps.Polyline;
 
 namespace HeatApp.Views.HeatViews.Common
 {
     public partial class MainMapPage : ContentPage
     {
+        Entry searchBar = null;
+        IGoogleMapsApiService googleSerivce;
         List<Position> positions = new List<Position>();
         List<Position> busPositions = new List<Position>
         {
@@ -38,6 +44,7 @@ namespace HeatApp.Views.HeatViews.Common
         {
             InitializeComponent();
             map.Pins.Clear();
+            googleSerivce = DependencyService.Get<IGoogleMapsApiService>();
             viewModel = new MainMapViewModel(Navigation, map);
             BindingContext = viewModel;
             AddMapStyle();
@@ -122,18 +129,20 @@ namespace HeatApp.Views.HeatViews.Common
             map.Polylines.Add(polyline);
             map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(polyline.Positions[0].Latitude, polyline.Positions[0].Longitude), Xamarin.Forms.GoogleMaps.Distance.FromMiles(0.50f)));
         }
-        private void DrawRoute()
+        private async void DrawRoute(int routeID = 0)
         {
             map.Polylines.Clear();
             Polyline polyline = new Polyline();
             polyline.StrokeColor = Color.FromHex("#F4A32C");
-            polyline.StrokeWidth = 6;
+            polyline.StrokeWidth = 3;
 
-            foreach (var stop in viewModel.Stops)
+            int count = 0;
+            Position previousPos = new Position();
+            foreach (var stop in viewModel.Stops.Where(p => p.RouteID == routeID).OrderBy(a => a.Order))
             {
-                Position position = new Position(stop.Latitude, stop.Longitude);
-                polyline.Positions.Add(position);
-                Pin pinC = new Pin
+
+                var position = new Position(stop.Latitude, stop.Longitude);
+                var pinC = new Pin
                 {
                     Icon = BitmapDescriptorFactory.FromBundle("bus_station"),
                     Position = position,
@@ -141,7 +150,26 @@ namespace HeatApp.Views.HeatViews.Common
                     Address = stop.Description
                 };
                 map.Pins.Add(pinC);
+
+                if (count != 0)
+                {
+                    var googleDirections = await googleSerivce.GetDirections(previousPos.Latitude.ToString(), previousPos.Longitude.ToString(), position.Latitude.ToString(), position.Longitude.ToString());
+
+                    if (googleDirections.Routes != null && googleDirections.Routes.Any())
+                        foreach (var item in Enumerable.ToList(PolylineHelper.Decode(googleDirections.Routes.First().OverviewPolyline.Points)))
+                        {
+                            polyline.Positions.Add(item);
+                        }
+                }
+                else
+                {
+                    polyline.Positions.Add(position);
+                }
+
+                previousPos = new Position(position.Latitude, position.Longitude);
+                count++;
             }
+
             map.Polylines.Add(polyline);
             map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(polyline.Positions[0].Latitude, polyline.Positions[0].Longitude), Xamarin.Forms.GoogleMaps.Distance.FromMiles(0.34f)));
         }
@@ -185,7 +213,8 @@ namespace HeatApp.Views.HeatViews.Common
             myLocation.IsVisible = true;
             followRoute.IsVisible = true;
             map.Pins.Clear();
-            DrawRoute();
+            // int routeID = (lstRoutes.SelectedItem != null) ? (lstRoutes.SelectedItem as RouteDTO).ID : 0;
+            DrawRoute(1);
         }
         // Do NOT mark async method.
         // Because Xamarin.Forms.GoogleMaps wait synchronously for this callback returns.
@@ -246,6 +275,32 @@ namespace HeatApp.Views.HeatViews.Common
         {
             map.Pins.Clear();
             await ShowNearStopRoute();
+        }
+
+        private void OnFilterTextChanged(object sender, TextChangedEventArgs e)
+        {
+            searchBar = (sender as Entry);
+            if (lstRoutes.DataSource != null)
+            {
+                this.lstRoutes.DataSource.Filter = FilterContacts;
+                this.lstRoutes.DataSource.RefreshFilter();
+            }
+        }
+
+        private bool FilterContacts(object obj)
+        {
+            if (searchBar == null || searchBar.Text == null)
+                return true;
+
+            var contacts = obj as RouteDTO;
+            if (contacts.Description.ToLower().Contains(searchBar.Text.ToLower())
+                 || contacts.Description.ToLower().Contains(searchBar.Text.ToLower()))
+                return true;
+            else if ((contacts.Code?.ToLower().Contains(searchBar.Text.ToLower())).GetValueOrDefault(false)
+                 || (contacts.Code?.ToLower().Contains(searchBar.Text.ToLower())).GetValueOrDefault(false))
+                return true;
+            else
+                return false;
         }
     }
 }

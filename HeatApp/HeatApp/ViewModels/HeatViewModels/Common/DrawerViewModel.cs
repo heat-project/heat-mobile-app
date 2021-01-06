@@ -1,4 +1,5 @@
-﻿using HeatApp.Views.HeatViews.Common;
+﻿using HeatApp.Helpers;
+using HeatApp.Views.HeatViews.Common;
 using HeatApp.Views.HeatViews.Routes;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -31,17 +32,18 @@ namespace HeatApp.ViewModels.HeatViewModels.Common
         public DrawerViewModel(INavigation navigation) : base(navigation)
         {
             //this.HeaderImagePath = "Album2.png";
-            ProfileImage = "ProfileImage16.png";
+            ProfileImage = "account.png";
 
             Menu = new ObservableCollection<ProfileModel>()
             {
                 new ProfileModel { Name = "Rutas", ImagePath = "routes.png" },
                 new ProfileModel { Name = "Ayuda", ImagePath = "help.png" },
-                new ProfileModel { Name = "Configuraciones", ImagePath = "settings.png" },
+                new ProfileModel { Name = "Perfil", ImagePath = "settings.png" },
             };
 
             MenuItemTapCommand = new Command<ProfileModel>(async (profile) => await OnMenuItemTapped(profile));
             LogOutCommand = new Command(LogOut);
+            ProfileName = Settings.FullName;
         }
 
         #endregion
@@ -104,7 +106,7 @@ namespace HeatApp.ViewModels.HeatViewModels.Common
         /// </summary>
         public string ProfileImage
         {
-            get { return App.BaseImageUrl + profileImage; }
+            get { return profileImage; }
             set { profileImage = value; }
         }
 
@@ -167,7 +169,7 @@ namespace HeatApp.ViewModels.HeatViewModels.Common
                 case "Rutas":
                     await navigation.PushModalAsync(new RoutePage());
                     break;
-                case "Configuraciones":
+                case "Perfil":
                     await navigation.PushModalAsync(new ConfigPage());
                     break;
             }

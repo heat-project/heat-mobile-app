@@ -15,7 +15,7 @@ namespace HeatApp.ViewModels.HeatViewModels.Route
         public RouteViewModel(INavigation navigation) : base(navigation)
         {
             SetServices();
-            GetRoutes().Wait();
+            GetRoutes();
         }
         #endregion
 
@@ -30,27 +30,13 @@ namespace HeatApp.ViewModels.HeatViewModels.Route
             get => routes;
             set => SetProperty(ref routes, value);
         }
-        private ObservableCollection<RouteDTO> routesFavorite;
-        public ObservableCollection<RouteDTO> RoutesFavorite
-        {
-            get => routesFavorite;
-            set => SetProperty(ref routesFavorite, value);
-        }
-        private ObservableCollection<RouteDTO> routesSeen;
-        public ObservableCollection<RouteDTO> RoutesSeen
-        {
-            get => routesSeen;
-            set => SetProperty(ref routesSeen, value);
-        }
         #endregion
 
         #region Methods
-        private async Task GetRoutes()
+        private async void GetRoutes()
         {
             StartBusy();
             Routes = new ObservableCollection<RouteDTO>(await routeService.GetAll());
-            RoutesFavorite = new ObservableCollection<RouteDTO>(await routeService.GetFavorites());
-            RoutesSeen = new ObservableCollection<RouteDTO>(await routeService.GetPreviouslySeen());
             EndBusy();
         }
         #endregion

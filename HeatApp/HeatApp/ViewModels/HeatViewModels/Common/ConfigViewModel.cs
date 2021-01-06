@@ -1,4 +1,5 @@
-﻿using HeatApp.Models;
+﻿using HeatApp.Helpers;
+using HeatApp.Models;
 using HeatApp.ViewModels;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
@@ -28,19 +29,19 @@ namespace HeatApp
                 new HealthProfile()
                 {
                     Category = "Correo Electronico",
-                    CategoryValue = "cacosta9822@gmail",
+                    CategoryValue = Settings.Email,
                     ImagePath = "CaloriesEaten.svg"
                 },
                 new HealthProfile()
                 {
                     Category = "Telefono",
-                    CategoryValue = "(829)-973-5865",
+                    CategoryValue = Settings.Phone,
                     ImagePath = "HeartRate.svg"
                 }
             };
 
-            this.ProfileImage = App.BaseImageUrl + "ProfileImage16.png";
-            this.ProfileName = "Carlos Acosta";
+            this.ProfileImage = "account.png";
+            this.ProfileName = Settings.FullName;
             this.State = "Santo Domingo";
             this.Country = "DO";
         }

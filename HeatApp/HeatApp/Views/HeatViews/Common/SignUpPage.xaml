@@ -186,6 +186,11 @@
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
         </buttons:SfButton>
+
+        <ActivityIndicator IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           Grid.Row="0"
+                           VerticalOptions="Center"/>
     </Grid>
 
 </ContentPage>

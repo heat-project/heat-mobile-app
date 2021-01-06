@@ -8,7 +8,7 @@
              xmlns:cards="clr-namespace:Syncfusion.XForms.Cards;assembly=Syncfusion.Cards.XForms"
              xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
              xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
-             xmlns:svg="clr-namespace:HeatApp.Controls" xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:svg="clr-namespace:HeatApp.Controls" xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="HeatApp.Views.HeatViews.Common.ConfigPage">
 
 
@@ -53,14 +53,14 @@
                                      BorderColor="{DynamicResource Gray-White}"
                                      BackgroundColor="{DynamicResource Gray-White}">
 
-                    <Image Aspect="AspectFill"
-                       BackgroundColor="{DynamicResource Gray-White}">
-                        <Image.Source>
-                            <UriImageSource Uri="{Binding ProfileImage}"
-                                                CacheValidity="14"
-                                                CachingEnabled="True"/>
-                        </Image.Source>
-                    </Image>
+                     <ffimageloading:CachedImage
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+			                        WidthRequest="300"
+                                    HeightRequest="300"
+			                        DownsampleToViewSize="true"
+			                        Source = "{Binding ProfileImage}"/>
+                        <!--  Profile image  -->
 
                 </border:SfBorder>
 

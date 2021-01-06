@@ -7,10 +7,19 @@
              xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms" 
              xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
              x:Class="HeatApp.Views.HeatViews.LoginPage"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:control="clr-namespace:HeatApp.Views.HeatViews.Controls"
+             xmlns:converter="clr-namespace:HeatApp.Converters" 
              ios:Page.UseSafeArea="true"
              NavigationPage.HasBackButton="False"
              NavigationPage.HasNavigationBar="False">
+
+        <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter"/>
+            <converter:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -61,49 +70,27 @@
                              Spacing="0" 
                              Margin="10">
 
-                        <border:SfBorder 
-                            BorderWidth="0" 
-                            HasShadow="False"
-                            ShadowColor="{DynamicResource Gray-600}">
+                        <control:ValidationEntryView PlaceHolder="Correo Electrónico" 
+                                                     Text="{Binding Email.Value}"                                           
+                                                     FontFamily="{StaticResource FontIcons}" 
+                                                     IsValid="{Binding Email.IsValid}"
+                                                     Icon="{StaticResource AvatarIcon}"/>
 
-                            <inputLayout:SfTextInputLayout                          
-                            LeadingViewPosition="Inside"
-                            ContainerType="Outlined"
-                            ContainerBackgroundColor="White"
-                            UnfocusedColor="{DynamicResource PrimaryColor}"
-                            FocusedColor="{StaticResource SecondaryColor}"
-                            OutlineCornerRadius="5">
+                        <Label Text="{Binding Email.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                               IsVisible="{Binding Email.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                               Style="{StaticResource ErrorTextStyle}"/>
 
-                                <Entry Placeholder="Correo electrónico"/>
+                        <control:ValidationEntryView PlaceHolder="Contraseña" 
+                                                     Text="{Binding Password.Value}"
+                                                     IsValid="{Binding Password.IsValid}"
+                                                     IsPassword="True" 
+                                                     FontFamily="{StaticResource FontIcons}" 
+                                                     Icon="{StaticResource Password}"/>
 
-                                <inputLayout:SfTextInputLayout.LeadingView>
-                                    <Label VerticalTextAlignment="Center" FontFamily="{StaticResource FontIcons}" Text="{StaticResource AvatarIcon}"/>
-                                </inputLayout:SfTextInputLayout.LeadingView>
-                            </inputLayout:SfTextInputLayout>
+                        <Label Text="{Binding Password.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                               IsVisible="{Binding Password.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                               Style="{StaticResource ErrorTextStyle}"/>
 
-                        </border:SfBorder>
-
-                        <border:SfBorder 
-                            BorderWidth="0" 
-                            HasShadow="False"
-                            ShadowColor="{DynamicResource Gray-600}">
-
-                            <inputLayout:SfTextInputLayout                          
-                            LeadingViewPosition="Inside"
-                            ContainerType="Outlined"
-                            ContainerBackgroundColor="White"
-                            UnfocusedColor="{DynamicResource PrimaryColor}"
-                            FocusedColor="{StaticResource SecondaryColor}"
-                            OutlineCornerRadius="5">
-
-                                <Entry IsPassword="True" Placeholder="Contraseña" />
-
-                                <inputLayout:SfTextInputLayout.LeadingView>
-                                    <Label VerticalTextAlignment="Center" FontFamily="{StaticResource FontIcons}" Text="{StaticResource Password}"/>
-                                </inputLayout:SfTextInputLayout.LeadingView>
-                            </inputLayout:SfTextInputLayout>
-
-                        </border:SfBorder>
                     </StackLayout>
 
                     <Label  x:Name="ForgotPasswordLabel"
@@ -126,9 +113,9 @@
                         HasShadow="False"
                         Style="{StaticResource PrimaryButtonStyle}"
                         Text="INICIAR SESIÓN"
-                            VerticalOptions="EndAndExpand"
+                        VerticalOptions="EndAndExpand"
                         HorizontalOptions="FillAndExpand"
-                            Clicked="Login_Clicked">
+                            Command="{Binding SignInCommand}">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal">
@@ -177,5 +164,10 @@
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
         </buttons:SfButton>
+
+        <ActivityIndicator IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           Grid.Row="0"
+                           VerticalOptions="Center"/>
     </Grid>
 </ContentPage>

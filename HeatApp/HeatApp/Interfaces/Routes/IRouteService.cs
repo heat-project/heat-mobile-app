@@ -9,8 +9,8 @@ namespace HeatApp.Interfaces.Routes
     public interface IRouteService
     {
         Task<List<RouteDTO>> GetFavorites();
-        Task<List<RouteDTO>> GetAll();
+        Task<IEnumerable<RouteDTO>> GetAll();
         Task<List<RouteDTO>> GetPreviouslySeen();
-        Task<List<StopDTO>> GetStops(int routeID);
+        Task<IEnumerable<StopDTO>> GetStops(int routeID = 0);
     }
 }

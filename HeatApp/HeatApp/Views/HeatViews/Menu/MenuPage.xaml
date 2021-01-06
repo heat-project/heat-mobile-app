@@ -7,7 +7,7 @@
              xmlns:viewModel="clr-namespace:HeatApp.ViewModels.Social" 
              xmlns:control="clr-namespace:HeatApp.Controls" 
              xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
-             xmlns:viewModel1="clr-namespace:HeatApp.ViewModels.HeatViewModels.Common"
+             xmlns:viewModel1="clr-namespace:HeatApp.ViewModels.HeatViewModels.Common" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="HeatApp.Views.HeatViews.Menu.MenuPage"  
              x:Name="rootPage"
              Title="Menu">
@@ -31,32 +31,28 @@
                                 CornerRadius="60"
                                 HasShadow="True"
                                 HeightRequest="80"
-                    Grid.Row="0"
-                                HorizontalOptions="StartAndExpand"
+                                Grid.Row="0"
+                                HorizontalOptions="Center"
                                 WidthRequest="80">
 
+                        <ffimageloading:CachedImage
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+			                        WidthRequest="300"
+                                    HeightRequest="300"
+			                        DownsampleToViewSize="true"
+			                        Source = "{Binding ProfileImage}"/>
                         <!--  Profile image  -->
-                        <Image
-                                    Aspect="Fill"
-                                    BackgroundColor="{DynamicResource Gray-200}"
-                                    HeightRequest="86"
-                                    WidthRequest="86">
-                            <Image.Source>
-                                <UriImageSource Uri="{Binding ProfileImage}" 
-			                                 CacheValidity="14" 
-			                                 CachingEnabled="true"/>
-                            </Image.Source>
-                        </Image>
 
                     </border:SfBorder>
 
                     <Label Margin="16,0,0,16"
                            FontFamily="{StaticResource Montserrat-SemiBold}"                      
                            FontSize="25"
-                           HorizontalOptions="Start"
-                           HorizontalTextAlignment="Start"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"
                            LineHeight="{OnPlatform Default=-1, Android=1.5}"
-                           Text="Carlos Acosta"
+                           Text="{Binding ProfileName}"
                            TextColor="White" />
                 </StackLayout>
 

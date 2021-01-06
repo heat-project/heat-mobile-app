@@ -1,4 +1,6 @@
+using HeatApp.Helpers;
 using HeatApp.Interfaces;
+using HeatApp.Interfaces.Map;
 using HeatApp.Interfaces.Routes;
 using HeatApp.Services;
 using HeatApp.Views.Catalog;
@@ -22,7 +24,10 @@ namespace HeatApp
             InitializeComponent();
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzE4NzkyQDMxMzgyZTMyMmUzMEpENWQ0ZXM5WXpWc2hyNW1xNXI0OUYveU9Fd3VWS21KQ0xqZHZBdnRiNWc9");
             SetServices();
-            MainPage = new NavigationPage(new InitialPage());
+            if(IsLogged())
+                MainPage = new RootPage();
+            else
+                MainPage = new NavigationPage(new InitialPage());
         }
 
         protected override void OnStart()
@@ -44,7 +49,12 @@ namespace HeatApp
             DependencyService.Register<IRouteService, RouteService>();
             DependencyService.Register<IBusService, BusService>();
             DependencyService.Register<IGoogleMapsApiService, GoogleMapsApiService>();
+            DependencyService.Register<IMapService, MapService>();
             GoogleMapsApiService.Initialize(Constants.GoogleMapsAPIKey);
+        }
+        private bool IsLogged()
+        {
+            return !string.IsNullOrEmpty(Settings.Token) && !string.IsNullOrWhiteSpace(Settings.Token);
         }
         #endregion
     }
