@@ -46,5 +46,9 @@
 	<string>Podemos utilizar su ubicación mientras utilice la aplicación?</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Podemos utilizar su ubicación?</string>
+<key>UIBackgroundModes</key>
+<array>
+	<string>location</string>
+</array>
 </dict>
 </plist>

@@ -5,6 +5,7 @@ namespace HeatApp
     {
         Stop,
         Bus,
-        Station
+        Station,
+        User
     }
 }

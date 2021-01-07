@@ -6,6 +6,7 @@ using HeatApp.Models;
 using HeatApp.Models.Dashboard;
 using HeatApp.Models.HeatModels;
 using HeatApp.Views.HeatViews.Common;
+using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,6 +17,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
+using Position = Xamarin.Forms.GoogleMaps.Position;
 
 namespace HeatApp.ViewModels.Heat
 {
@@ -40,13 +42,35 @@ namespace HeatApp.ViewModels.Heat
         private ICommand getStopInfoCommand;
         public ICommand GetStopInfoCommand => (getStopInfoCommand ?? new Command<StopDTO>(async (stop) => await GetStopInfo(stop)));
 
-
         private ICommand goToStopCommand;
         public ICommand GoToStopCommand => (goToStopCommand ?? new Command<StopDTO>(async (stop) => await GoToStop(stop)));
+
+        private ICommand showRouteCommand;
+        public ICommand ShowRouteCommand => (showRouteCommand ?? new Command<object>(async (obj) => await ShowRoute(obj)));
+
+        private ICommand showMyLocationCommand;
+        public ICommand ShowMyLocationCommand => (showMyLocationCommand ?? new Command(async () => await GoToMyLocation()));
+
+        private ICommand goToNearstStopCommand;
+        public ICommand GoToNearstStopCommand => (goToNearstStopCommand ?? new Command(async () => await GoToNearstStop()));
         #endregion
 
         #region Propertties
         private Map map;
+
+        private int selectedRouteID;
+        public int SelectedRouteID
+        {
+            get => selectedRouteID;
+            set => SetProperty(ref selectedRouteID, value);
+        }
+
+        private Pin user;
+        public Pin UserPin
+        {
+            get => user;
+            set => SetProperty(ref user, value);
+        }
 
         private string from = string.Empty;
         public string From
@@ -104,14 +128,14 @@ namespace HeatApp.ViewModels.Heat
             set => SetProperty(ref showHeaderSearch, value);
         }
 
-        private bool showRoutes = false;
+        private bool showRoutes = true;
         public bool ShowRoutes
         {
             get => showRoutes;
             set => SetProperty(ref showRoutes, value);
         }
 
-        private bool showMenu = false;
+        private bool showMenu = true;
         public bool ShowMenu
         {
             get => showMenu;
@@ -148,6 +172,82 @@ namespace HeatApp.ViewModels.Heat
         #endregion
 
         #region Methods
+        private async Task GoToMyLocation()
+        {
+            ShowLocation = false;
+            ShowFollowRoute = false;
+            ShowHeaderSearch = false;
+            ShowRoutes = true;
+            ShowMenu = true;
+            MapService.Map.Polylines.Clear();
+            await map.MoveCamera(CameraUpdateFactory.NewPositionZoom(UserPin.Position, 18));
+
+        }
+
+        private async Task ShowRoute(object obj)
+        {
+            if (IsBusy) return;
+            var polyline = new Xamarin.Forms.GoogleMaps.Polyline();
+            var previousPos = new Position();
+            int count = 0;
+
+            ShowHeaderSearch = true;
+            ShowLocation = true;
+            ShowFollowRoute = true;
+            ShowRoutes = false;
+            ShowMenu = false;
+
+            try
+            {
+                var ItemData = (obj as Syncfusion.ListView.XForms.ItemTappedEventArgs).ItemData as RouteDTO;
+
+
+                StartBusy();
+                SetLoadingMessage(Constants.Messages.SearchingStops);
+
+                MapService.Map.Polylines.Clear();
+                MapService.Map.Pins.Clear();
+                MapService.Map.Pins.Add(UserPin);
+                SelectedRouteID = ItemData.ID;
+                foreach (var item in Stops.Where(p => p.RouteID == ItemData.ID))
+                {
+                    MapService.Map.Pins.Add(BusStationPin(new Position(item.Latitude, item.Longitude), item));
+
+                    if (count == 0)
+                        polyline.Positions.Add(new Position(item.Latitude, item.Longitude));
+                    else
+                    {
+                        var googleDirections = await GoogleMapsService.GetDirections(previousPos.Latitude.ToString(),
+                                                                      previousPos.Longitude.ToString(),
+                                                                      item.Latitude.ToString(),
+                                                                      item.Longitude.ToString());
+
+                        if (googleDirections.Routes != null && googleDirections.Routes.Any())
+                        {
+                            foreach (var poli in Enumerable.ToList(PolylineHelper.Decode(googleDirections.Routes.First().OverviewPolyline.Points)))
+                            {
+                                polyline.Positions.Add(poli);
+                            }
+
+                        }
+                    }
+                    previousPos = new Position(item.Latitude, item.Longitude);
+                    count++;
+                }
+
+                MapService.DrawRoute(polyline);
+                map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(polyline.Positions[0].Latitude, polyline.Positions[0].Longitude), Xamarin.Forms.GoogleMaps.Distance.FromMiles(0.34f)));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                EndBusy();
+            }
+        }
+
         private async Task GetStopInfo(StopDTO stop)
         {
             this.Stop = stop;
@@ -215,23 +315,29 @@ namespace HeatApp.ViewModels.Heat
         {
             await GetRoute();
             await GetStops(map);
-            var location = await MapService.GetCurrentLocation();
+            var location = await LocationHelper.GetCurrentPosition();
+            LocationHelper.PositionChanged += PositionChanged;
+            await LocationHelper.StartListening();
             CurrentLatitude = location.Latitude;
             CurrentLongitude = location.Longitude;
+            SetUserPin(new Position(CurrentLatitude, CurrentLongitude));
+            map.Pins.Add(UserPin);
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(UserPin.Position, Distance.FromMiles(0.30f)));
         }
 
-        private async Task GoToStop(StopDTO stop)
+        private async Task GoToStop(StopDTO stop, bool skipBusy = false)
         {
 
-            if (IsBusy) return;
+            if (IsBusy && !skipBusy) return;
 
             try
             {
                 StartBusy();
                 map.Pins.Clear();
 
-                map.Pins.Add(UserPin(new Position(CurrentLatitude, CurrentLongitude)));
-                map.Pins.Add(BusStationPin(new Position(stop.Latitude, stop.Longitude)));
+                SetUserPin(new Position(CurrentLatitude, CurrentLongitude));
+                map.Pins.Add(UserPin);
+                map.Pins.Add(BusStationPin(new Position(stop.Latitude, stop.Longitude), stop));
 
                 var polyline = new Xamarin.Forms.GoogleMaps.Polyline();
 
@@ -265,28 +371,74 @@ namespace HeatApp.ViewModels.Heat
                 EndBusy();
             }
         }
+
+        private async Task GoToNearstStop()
+        {
+
+            if (IsBusy) return;
+            try
+            {
+                StartBusy();
+                var stop = new StopDTO();
+                var nearestStop = new Position();
+                double auxDistance = 0;
+                foreach (var item in Stops.Where(p => p.RouteID == SelectedRouteID))
+                {
+                    var thisDistance = GeolocatorUtils.CalculateDistance(UserPin.Position.Latitude, UserPin.Position.Longitude, item.Latitude, item.Longitude, GeolocatorUtils.DistanceUnits.Kilometers);
+                    if (nearestStop.Longitude == 0 && nearestStop.Latitude == 0)
+                    {
+                        nearestStop = new Position(item.Latitude, item.Longitude);
+                        auxDistance = thisDistance;
+                        stop = item;
+                    }
+                    else
+                    {
+                        if (thisDistance < auxDistance)
+                        {
+                            nearestStop = new Position(item.Latitude, item.Longitude);
+                            auxDistance = thisDistance;
+                            stop = item;
+                        }
+                    }
+                }
+
+                await GoToStop(stop, true);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                EndBusy();
+            }
+        }
         #endregion
 
         #region AuxiliarMethods
-        private Pin BusStationPin(Position position)
+        private Pin BusStationPin(Position position, StopDTO stop)
         {
             return new Pin
             {
                 Icon = BitmapDescriptorFactory.FromBundle("bus_station"),
                 Position = position,
-                Label = stop.Street,
+                Label = stop.Street ?? stop.Description,
                 Address = stop.Description,
                 BindingContext = stop
             };
         }
-        private Pin UserPin(Position position)
+        private void SetUserPin(Position position)
         {
-            return new Pin
-            {
-                Icon = BitmapDescriptorFactory.FromBundle("user_marker"),
-                Position = position,
-                Label = "Origen"
-            }; ;
+            if (UserPin == null)
+
+                UserPin = new Pin
+                {
+                    Icon = BitmapDescriptorFactory.FromBundle("user_marker"),
+                    Position = position,
+                    Label = "Origen"
+                };
+            else
+                UserPin.Position = position;
         }
         private void SetServices()
         {
@@ -319,6 +471,19 @@ namespace HeatApp.ViewModels.Heat
         {
             // convert radians to degrees (as bearing: 0...360)
             return (ToDegrees(radians) + 360) % 360;
+        }
+        #endregion
+
+        #region Events
+        private async void PositionChanged(object sender, PositionEventArgs e)
+        {
+            //If updating the UI, ensure you invoke on main thread
+            var position = e.Position;
+
+            CurrentLatitude = position.Latitude;
+            CurrentLongitude = position.Longitude;
+            SetUserPin(new Position(CurrentLatitude, CurrentLongitude));
+            await map.MoveCamera(CameraUpdateFactory.NewPositionZoom(UserPin.Position, 18));
         }
         #endregion
     }

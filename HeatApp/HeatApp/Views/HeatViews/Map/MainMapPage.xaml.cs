@@ -48,13 +48,7 @@ namespace HeatApp.Views.HeatViews.Common
             viewModel = new MainMapViewModel(Navigation, map);
             BindingContext = viewModel;
             AddMapStyle();
-            GetPostionsForRoute();
             this.rootPage = rootPage;
-        }
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-            await GetCurrentLocation();
         }
         private async Task GetCurrentLocation()
         {
@@ -207,18 +201,6 @@ namespace HeatApp.Views.HeatViews.Common
             double longitude2 = viewModel.Stops.LastOrDefault().Longitude;
 
             DrawRoute(await viewModel.GetRouteToStop(new Position(latitude, longitude), new Position(latitude2, longitude2)));
-        }
-        private void SfListView_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
-        {
-            headerSearch.IsVisible = true;
-            lstRoutes.IsVisible = false;
-            btnMenu.IsVisible = false;
-            stkEntry.IsVisible = false;
-            myLocation.IsVisible = true;
-            followRoute.IsVisible = true;
-            map.Pins.Clear();
-            // int routeID = (lstRoutes.SelectedItem != null) ? (lstRoutes.SelectedItem as RouteDTO).ID : 0;
-            DrawRoute(1);
         }
         // Do NOT mark async method.
         // Because Xamarin.Forms.GoogleMaps wait synchronously for this callback returns.
