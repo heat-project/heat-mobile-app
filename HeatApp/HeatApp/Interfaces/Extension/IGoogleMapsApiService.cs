@@ -8,6 +8,6 @@ namespace HeatApp.Interfaces
 {
     public interface IGoogleMapsApiService
     {
-        Task<GoogleDirection> GetDirections(string originLatitude, string originLongitude, string destinationLatitude, string destinationLongitude);
+        Task<GoogleDirection> GetDirections(string originLatitude, string originLongitude, string destinationLatitude, string destinationLongitude, string mode = "driving");
     }
 }

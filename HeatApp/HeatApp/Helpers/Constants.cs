@@ -15,6 +15,7 @@ namespace HeatApp
         public static class Messages
         {
             public const string Loading = "Cargando";
+            public const string SearchingStops = "Buscando paradas";
 
             public static class Validation
             {

@@ -32,13 +32,13 @@ namespace HeatApp.Services
             _googleMapsKey = googleMapsKey;
         }
 
-        public async Task<GoogleDirection> GetDirections(string originLatitude, string originLongitude, string destinationLatitude, string destinationLongitude)
+        public async Task<GoogleDirection> GetDirections(string originLatitude, string originLongitude, string destinationLatitude, string destinationLongitude, string mode = "driving")
         {
             GoogleDirection googleDirection = new GoogleDirection();
 
             using (var httpClient = CreateClient())
             {
-                var response = await httpClient.GetAsync($"api/directions/json?mode=driving&transit_routing_preference=less_driving&origin={originLatitude},{originLongitude}&destination={destinationLatitude},{destinationLongitude}&key={_googleMapsKey}").ConfigureAwait(false);
+                var response = await httpClient.GetAsync($"api/directions/json?mode={mode}&transit_routing_preference=less_driving&origin={originLatitude},{originLongitude}&destination={destinationLatitude},{destinationLongitude}&key={_googleMapsKey}").ConfigureAwait(false);
                 if (response.IsSuccessStatusCode)
                 {
                     var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

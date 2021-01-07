@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+      x:Class="HeatApp.Views.HeatViews.Map.StopInfoView"
+      BackgroundColor="White">
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+
+    <Label Grid.Row="0"
+           FontFamily="{StaticResource Montserrat-SemiBold}"                       
+           FontAttributes="Bold"
+           HorizontalOptions="Start"
+           Text="{Binding Stop.Description}"
+           TextColor="{DynamicResource PrimaryColor}"
+           FontSize="Subtitle"
+           Padding="10"/>
+
+    <StackLayout Grid.Row="1"
+                 Orientation="Horizontal"
+                 Spacing="0"
+                 Padding="10">
+
+        <Label Text="{StaticResource Home}" 
+               HorizontalTextAlignment="Center"
+               FontFamily="{StaticResource FontIcons}" 
+               FontSize="Header" 
+               TextColor="Black"/>
+
+        <Label FontFamily="{StaticResource Montserrat-Regular}">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Dirección: " TextColor="{DynamicResource Gray-600}"/>
+                    <Span Text="{Binding Stop.Street}" TextColor="{DynamicResource Gray-900}"  FontAttributes="Bold"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+    </StackLayout>
+
+    <StackLayout Grid.Row="2"
+                 Orientation="Horizontal"
+                 Spacing="0"
+                 Padding="10">
+
+        <Label Text="{StaticResource Sort}" 
+               HorizontalTextAlignment="Center"
+               FontFamily="{StaticResource FontIcons}" 
+               FontSize="Header" 
+               TextColor="Black"/>
+
+        <Label FontFamily="{StaticResource Montserrat-Regular}">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Ruta: " TextColor="{DynamicResource Gray-600}"/>
+                    <Span Text="{Binding Stop.RouteCode,StringFormat='{0} - '}" TextColor="{DynamicResource Gray-900}"  FontAttributes="Bold"/>
+                    <Span Text="{Binding Stop.Route}" TextColor="{DynamicResource Gray-900}"  FontAttributes="Bold"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+    </StackLayout>
+
+    <StackLayout Grid.Row="4"
+                 Margin="15"
+                 Padding="10">
+
+        <buttons:SfButton Style="{StaticResource PrimaryButtonStyle}"
+                          Text="IR A PARADA"
+                          HorizontalOptions="FillAndExpand"
+                          Command="{Binding GoToStopCommand}"
+                          CommandParameter="{Binding Stop}"
+                          IsEnabled="{Binding IsNotBusy}"/>
+    </StackLayout>
+
+</Grid>

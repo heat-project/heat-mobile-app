@@ -8,14 +8,23 @@
              xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
              xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" 
              xmlns:controls="clr-namespace:HeatApp.Controls" 
-             xmlns:viewModel1="clr-namespace:HeatApp.ViewModels.Dashboard" xmlns:local="clr-namespace:HeatApp.Views.HeatViews.Map"
+             xmlns:viewModel1="clr-namespace:HeatApp.ViewModels.Dashboard"
+             xmlns:local="clr-namespace:HeatApp.Views.HeatViews.Map"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              NavigationPage.HasBackButton="False"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             x:Name="root">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
+        <ActivityIndicator Grid.Row="0"
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="CenterAndExpand"
+                           BackgroundColor="{DynamicResource PrimaryColor}"
+                           IsEnabled="{Binding IsBusy}"/>
 
         <maps:Map x:Name="map" 
                   Grid.Row="0"
@@ -25,6 +34,7 @@
 
         <local:SearchHeaderView IsVisible="false"
                                 x:Name="headerSearch"
+                                BindingContext="{Binding BindingContext, Source={x:Reference root}}"
                                 Grid.Row="0" />
 
         <buttons:SfButton Grid.Row="0"
@@ -122,6 +132,12 @@
         </buttons:SfButton>
 
 
+        <local:StopInfoView IsVisible="{Binding ShowStopInfo}"
+                            Grid.Row="0"
+                            BindingContext="{Binding BindingContext, Source={x:Reference root}}"
+                            VerticalOptions="End"/>
+
+
         <StackLayout Grid.Row="0" 
                      Margin="0,40"
                      Spacing="15"
@@ -199,7 +215,7 @@
                                             <Label HorizontalOptions="EndAndExpand" Grid.Row="0" Grid.Column="1" FontAttributes="Bold" TextColor="{Binding Color}" Text="{Binding Estimate}" FontSize="20"/>
                                             <Label HorizontalOptions="EndAndExpand" Grid.Row="1" Grid.Column="1" TextColor="{Binding Color}" Text="MIN" FontFamily="{StaticResource Montserrat-Bold}" FontSize="Small"/>
 
-                                           <StackLayout HorizontalOptions="StartAndExpand" Spacing="0" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0">
+                                            <StackLayout HorizontalOptions="StartAndExpand" Spacing="0" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0">
                                                 <Label TextColor="{DynamicResource Gray-700}" Text="{Binding Conductor}" FontFamily="{StaticResource Montserrat-Bold}" FontSize="Small"/>
                                             </StackLayout>
 

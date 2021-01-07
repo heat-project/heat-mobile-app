@@ -15,7 +15,7 @@ namespace HeatApp.Models.HeatModels
         public string Code { get; set; }
 
         [JsonProperty("street")]
-        public string Title { get; set; }
+        public string Street { get; set; }
 
         [JsonProperty("description")]
         public string Description { get; set; }

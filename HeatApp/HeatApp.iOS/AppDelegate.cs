@@ -19,6 +19,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 using Syncfusion.XForms.iOS.Backdrop;
+using Syncfusion.SfBusyIndicator.XForms.iOS;
 
 namespace HeatApp.iOS
 {

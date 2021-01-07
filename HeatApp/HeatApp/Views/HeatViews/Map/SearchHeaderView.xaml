@@ -66,20 +66,20 @@
         </BoxView>
     </StackLayout>
 
-    <Entry Placeholder="Enter Pickup"
+    <Entry Placeholder="Desde"
                Grid.Row="1" 
                Grid.Column="1"
                Grid.ColumnSpan="2"
-               Text="Parada Av.Independencia"
+               Text="{Binding From}"
                x:Name="originEntry"
                ReturnType="Search"
                HorizontalOptions="FillAndExpand" />
 
-    <Entry Placeholder="Where to?"
+    <Entry Placeholder="Hasta"
                Grid.Row="2"
                Grid.Column="1"
                Grid.ColumnSpan="2"
-               Text="C11C10 - Av. Abraham Lincoln"
+               Text="{Binding To}"
                x:Name="destinationEntry"
                ReturnType="Search"
                HorizontalOptions="FillAndExpand" />

@@ -138,6 +138,8 @@ namespace HeatApp.Views.HeatViews.Common
 
             int count = 0;
             Position previousPos = new Position();
+            viewModel.SetLoadingMessage(Constants.Messages.SearchingStops);
+            viewModel.StartBusy();
             foreach (var stop in viewModel.Stops.Where(p => p.RouteID == routeID).OrderBy(a => a.Order))
             {
 
@@ -146,8 +148,9 @@ namespace HeatApp.Views.HeatViews.Common
                 {
                     Icon = BitmapDescriptorFactory.FromBundle("bus_station"),
                     Position = position,
-                    Label = stop.Title,
-                    Address = stop.Description
+                    Label = stop.Street,
+                    Address = stop.Description,
+                    BindingContext = stop
                 };
                 map.Pins.Add(pinC);
 
@@ -169,6 +172,7 @@ namespace HeatApp.Views.HeatViews.Common
                 previousPos = new Position(position.Latitude, position.Longitude);
                 count++;
             }
+            viewModel.EndBusy();
 
             map.Polylines.Add(polyline);
             map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(polyline.Positions[0].Latitude, polyline.Positions[0].Longitude), Xamarin.Forms.GoogleMaps.Distance.FromMiles(0.34f)));
@@ -222,7 +226,15 @@ namespace HeatApp.Views.HeatViews.Common
         {
             e.Handled = true;
 
-            await Navigation.PushModalAsync(new NavigationPage(new BusProfilePage(MoveBus)));
+            if (e.Pin.BindingContext is StopDTO)
+            {
+                if (viewModel.GetStopInfoCommand.CanExecute(e.Pin.BindingContext as StopDTO))
+                    viewModel.GetStopInfoCommand.Execute(e.Pin.BindingContext as StopDTO);
+            }
+            else
+            {
+                await Navigation.PushModalAsync(new NavigationPage(new BusProfilePage(MoveBus)));
+            }
         }
         private async void myLocation_Clicked(object sender, EventArgs e)
         {
