@@ -4,44 +4,54 @@ using System.Text;
 using HeatApp.Interfaces;
 using HeatApp.Models;
 using System.Threading.Tasks;
+using HeatApp.Helpers;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace HeatApp.Services
 {
-    public class BusService : IBusService
+    public class BusService : BaseService, IBusService
     {
-        public async Task<List<BusDTO>> GetAll()
+
+        public BusService()
         {
-            return new List<BusDTO>
-            {
-                new BusDTO
-                {
-                    ID = 1,
-                    Description = $"Autobus Prueba {1}",
-                    Latitude = (long)18.482519,
-                    Longitude = (long)-69.924915
-                },
-                new BusDTO
-                {
-                    ID = 2,
-                    Description = $"Autobus Prueba {2}",
-                    Latitude = (long)18.482662,
-                    Longitude = (long)-69.927709
-                },
-                new BusDTO
-                {
-                    ID = 3,
-                    Description = $"Autobus Prueba {3}",
-                    Latitude = (long)18.480525,
-                    Longitude = (long)-69.928461
-                },
-                new BusDTO
-                {
-                    ID = 4,
-                    Description = $"Autobus Prueba {4}",
-                    Latitude = (long)18.475702,
-                    Longitude = (long)-69.923736
-                }
-            };
+        }
+
+        public Task<BusDTO> SetPosition()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<BusDTO>> GetAll()
+        {
+            IEnumerable<BusDTO> buses = new List<BusDTO>();
+            ApiHttpClient.DefaultRequestHeaders.Clear();
+            ApiHttpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {Settings.Token}");
+            HttpResponseMessage response = await ApiHttpClient.GetAsync($"{Constants.UrlAPI}api/Vehicles/GetAllActives");
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+            var busResponse = JsonConvert.DeserializeObject<DataResponse<IEnumerable<BusDTO>>>(responseBody);
+
+            if (busResponse != null && busResponse.Success)
+                buses = busResponse.Data;
+
+            return buses;
+        }
+
+        public async Task<BusInfoDTO> GetByID(int id)
+        {
+            var busInfo = new BusInfoDTO();
+            ApiHttpClient.DefaultRequestHeaders.Clear();
+            ApiHttpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {Settings.Token}");
+            HttpResponseMessage response = await ApiHttpClient.GetAsync($"{Constants.UrlAPI}api/Vehicles/GetVehicleInfo?id={id}");
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+            var busResponse = JsonConvert.DeserializeObject<DataResponse<BusInfoDTO>>(responseBody);
+
+            if (busResponse != null && busResponse.Success)
+                busInfo = busResponse.Data;
+
+            return busInfo;
         }
     }
 }

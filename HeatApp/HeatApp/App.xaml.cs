@@ -3,6 +3,7 @@ using HeatApp.Interfaces;
 using HeatApp.Interfaces.Map;
 using HeatApp.Interfaces.Routes;
 using HeatApp.Services;
+using HeatApp.Services.Review;
 using HeatApp.Views.Catalog;
 using HeatApp.Views.Dashboard;
 using HeatApp.Views.Forms;
@@ -24,7 +25,7 @@ namespace HeatApp
             InitializeComponent();
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzE4NzkyQDMxMzgyZTMyMmUzMEpENWQ0ZXM5WXpWc2hyNW1xNXI0OUYveU9Fd3VWS21KQ0xqZHZBdnRiNWc9");
             SetServices();
-            if(IsLogged())
+            if (IsLogged())
                 MainPage = new RootPage();
             else
                 MainPage = new NavigationPage(new InitialPage());
@@ -50,6 +51,7 @@ namespace HeatApp
             DependencyService.Register<IBusService, BusService>();
             DependencyService.Register<IGoogleMapsApiService, GoogleMapsApiService>();
             DependencyService.Register<IMapService, MapService>();
+            DependencyService.Register<IReviewService, ReviewService>();
             GoogleMapsApiService.Initialize(Constants.GoogleMapsAPIKey);
         }
         private bool IsLogged()

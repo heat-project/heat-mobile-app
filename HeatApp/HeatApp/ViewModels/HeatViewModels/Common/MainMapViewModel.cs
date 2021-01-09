@@ -5,7 +5,9 @@ using HeatApp.Interfaces.Routes;
 using HeatApp.Models;
 using HeatApp.Models.Dashboard;
 using HeatApp.Models.HeatModels;
+using HeatApp.Views.HeatViews.Bus;
 using HeatApp.Views.HeatViews.Common;
+using Microsoft.AspNetCore.SignalR.Client;
 using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -29,6 +31,7 @@ namespace HeatApp.ViewModels.Heat
             this.map = map;
             SetServices();
             FillMap();
+            SetConnectionHub();
         }
         #endregion
 
@@ -36,6 +39,7 @@ namespace HeatApp.ViewModels.Heat
         private IRouteService RouteService;
         private IGoogleMapsApiService GoogleMapsService;
         private IMapService MapService;
+        private IBusService BusService;
         #endregion
 
         #region Commands
@@ -53,9 +57,14 @@ namespace HeatApp.ViewModels.Heat
 
         private ICommand goToNearstStopCommand;
         public ICommand GoToNearstStopCommand => (goToNearstStopCommand ?? new Command(async () => await GoToNearstStop()));
+
+        private ICommand goToBusProfileCommand;
+        public ICommand GoToBusProfileCommand => (goToBusProfileCommand ?? new Command<BusDTO>(async (bus) => await GoToBusProfile(bus)));
         #endregion
 
         #region Propertties
+        private TrackerHelper TrackerHelper;
+
         private Map map;
 
         private int selectedRouteID;
@@ -172,6 +181,25 @@ namespace HeatApp.ViewModels.Heat
         #endregion
 
         #region Methods
+        private async Task GoToBusProfile(BusDTO bus)
+        {
+            if (IsBusy) return;
+
+            try
+            {
+                StartBusy();
+                await navigation.PushModalAsync(new NavigationPage(new BusProfilePage(bus, UpdateBusPosition)));
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                EndBusy();
+            }
+        }
+
         private async Task GoToMyLocation()
         {
             ShowLocation = false;
@@ -313,16 +341,29 @@ namespace HeatApp.ViewModels.Heat
 
         private async void FillMap()
         {
-            await GetRoute();
-            await GetStops(map);
-            var location = await LocationHelper.GetCurrentPosition();
-            LocationHelper.PositionChanged += PositionChanged;
-            await LocationHelper.StartListening();
-            CurrentLatitude = location.Latitude;
-            CurrentLongitude = location.Longitude;
-            SetUserPin(new Position(CurrentLatitude, CurrentLongitude));
-            map.Pins.Add(UserPin);
-            map.MoveToRegion(MapSpan.FromCenterAndRadius(UserPin.Position, Distance.FromMiles(0.30f)));
+            try
+            {
+                StartBusy();
+                await GetRoute();
+                await GetStops(map);
+                var location = await LocationHelper.GetCurrentPosition();
+                LocationHelper.PositionChanged += PositionChanged;
+                await LocationHelper.StartListening();
+                CurrentLatitude = location.Latitude;
+                CurrentLongitude = location.Longitude;
+                SetUserPin(new Position(CurrentLatitude, CurrentLongitude));
+                map.Pins.Add(UserPin);
+                map.MoveToRegion(MapSpan.FromCenterAndRadius(UserPin.Position, Distance.FromMiles(0.30f)));
+                await GetAllBuses();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                EndBusy();
+            }
         }
 
         private async Task GoToStop(StopDTO stop, bool skipBusy = false)
@@ -416,6 +457,41 @@ namespace HeatApp.ViewModels.Heat
         #endregion
 
         #region AuxiliarMethods
+        private async Task GetAllBuses()
+        {
+            try
+            {
+                Buses = new ObservableCollection<BusDTO>(await BusService.GetAll());
+
+                if (Buses.Any())
+                {
+                    foreach (var item in Buses)
+                    {
+                        MapService.Map.Pins.Add(BusPin(item));
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private async void SetConnectionHub()
+        {
+            TrackerHelper = new TrackerHelper();
+            await TrackerHelper.Connect();
+            TrackerHelper.Connection.On<string, string>("SetVehiclePosition", (id, location) =>
+             {
+                 var bus = new BusDTO
+                 {
+                     ID = int.Parse(id),
+                     Location = location
+                 };
+                 UpdateBusPosition(bus);
+             });
+        }
+
         private Pin BusStationPin(Position position, StopDTO stop)
         {
             return new Pin
@@ -427,6 +503,19 @@ namespace HeatApp.ViewModels.Heat
                 BindingContext = stop
             };
         }
+
+        private Pin BusPin(BusDTO bus)
+        {
+            return new Pin
+            {
+                Icon = BitmapDescriptorFactory.FromBundle("small_green_bus"),
+                Position = new Position(bus.Latitude, bus.Longitude),
+                Label = bus.Description,
+                Address = bus.Description,
+                BindingContext = bus
+            };
+        }
+
         private void SetUserPin(Position position)
         {
             if (UserPin == null)
@@ -440,17 +529,17 @@ namespace HeatApp.ViewModels.Heat
             else
                 UserPin.Position = position;
         }
+
         private void SetServices()
         {
             RouteService = DependencyService.Get<IRouteService>();
+            BusService = DependencyService.Get<IBusService>();
             GoogleMapsService = DependencyService.Get<IGoogleMapsApiService>();
             MapService = DependencyService.Get<IMapService>();
             MapService.Map = map;
         }
 
-        double DegreeBearing(
-            double lat1, double lon1,
-            double lat2, double lon2)
+        private double DegreeBearing(double lat1, double lon1, double lat2, double lon2)
         {
             var dLon = ToRad(lon2 - lon1);
             var dPhi = Math.Log(
@@ -459,18 +548,40 @@ namespace HeatApp.ViewModels.Heat
                 dLon = dLon > 0 ? -(2 * Math.PI - dLon) : (2 * Math.PI + dLon);
             return ToBearing(Math.Atan2(dLon, dPhi));
         }
-        public static double ToRad(double degrees)
+
+        private static double ToRad(double degrees)
         {
             return degrees * (Math.PI / 180);
         }
-        public static double ToDegrees(double radians)
+
+        private static double ToDegrees(double radians)
         {
             return radians * 180 / Math.PI;
         }
-        public static double ToBearing(double radians)
+
+        private static double ToBearing(double radians)
         {
             // convert radians to degrees (as bearing: 0...360)
             return (ToDegrees(radians) + 360) % 360;
+        }
+
+        private void UpdateBusPosition(BusDTO bus)
+        {
+            var busPins = MapService.Map.Pins.Where(p => p.BindingContext is BusDTO);
+
+            foreach (var item in busPins)
+            {
+                var busContext = item.BindingContext as BusDTO;
+
+                if (busContext.ID == bus.ID)
+                {
+                    var buspin = item;
+                    Position lastPor = item.Position;
+                    buspin.Position = new Position(bus.Latitude, bus.Longitude);
+                    buspin.Rotation = (float)DegreeBearing(lastPor.Latitude, lastPor.Longitude, bus.Latitude, bus.Longitude);
+                    break;
+                }
+            }
         }
         #endregion
 

@@ -4,11 +4,14 @@ using System.Text;
 using HeatApp.Models;
 using System;
 using System.Threading.Tasks;
+using HeatApp.Helpers;
 
 namespace HeatApp.Interfaces
 {
     public interface IBusService
     {
-        Task<List<BusDTO>> GetAll();
+        Task<IEnumerable<BusDTO>> GetAll();
+        Task<BusDTO> SetPosition();
+        Task<BusInfoDTO> GetByID(int id);
     }
 }

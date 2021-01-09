@@ -32,6 +32,8 @@
     <x:String x:Key="Close">&#xe724;</x:String>
     <x:String x:Key="MapPin">&#xe729;</x:String>
     <x:String x:Key="Sort">&#xe70a;</x:String>
+    <x:String x:Key="NewMessage">&#xe720;</x:String>
+    <x:String x:Key="More">&#xe719;</x:String>
 
     <Color x:Key="PrimaryColor">#F4A32C</Color>
     <Color x:Key="SecondaryColor">#ED694A</Color>

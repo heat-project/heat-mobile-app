@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+             x:Class="HeatApp.Views.HeatViews.Bus.NewCommentView"
+             BackgroundColor="White">
+
+    <Grid VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <Label Grid.Row="0"
+               Margin="0,0,5,14"
+               Padding="10"
+               Text="Nuevo Comentario"
+               TextColor="{DynamicResource Gray-700}"
+               FontSize="14"
+               FontFamily="{StaticResource Montserrat-Medium}"
+               HeightRequest="21" />
+
+        <Editor Grid.Row="1"
+                VerticalOptions="Fill"
+                BackgroundColor="{StaticResource Gray-100}"
+                HorizontalOptions="FillAndExpand"
+                Text="{Binding NewReview.Text}"
+                HeightRequest="100"
+                x:Name="editor"/>
+
+        <rating:SfRating Grid.Row="2"
+                         Precision="Half"
+                         ItemCount="5"
+                         Value="{Binding NewReview.Rating}"
+                         ItemSize="20"
+                         HorizontalOptions="StartAndExpand">
+            <rating:SfRating.RatingSettings>
+                <rating:SfRatingSettings RatedFill="{DynamicResource PrimaryColor}" />
+            </rating:SfRating.RatingSettings>
+        </rating:SfRating>
+
+        <StackLayout Grid.Row="3"
+                     Orientation="Horizontal"
+                     Spacing="10"
+                     Padding="10">
+
+            <Button BackgroundColor="Transparent"
+                    TextColor="{StaticResource Gray-900}"
+                    Text="Cancelar"
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="Center"
+                    IsEnabled="{Binding IsNotBusy}"
+                    Command="{Binding CancelNewCommentCommand}"/>
+
+            <Button BackgroundColor="Transparent"
+                    TextColor="{StaticResource Gray-900}"
+                    Text="Comentar"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center"
+                    IsEnabled="True"
+                    Command="{Binding CommentCommand}">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button"
+                     Binding="{Binding Source={x:Reference editor},
+                                       Path=Text}"
+                     Value="">
+                        <Setter Property="IsEnabled" Value="False"  />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+        </StackLayout>
+    </Grid>
+
+</ContentView>

@@ -24,12 +24,13 @@
                            VerticalOptions="CenterAndExpand"
                            HorizontalOptions="CenterAndExpand"
                            BackgroundColor="{DynamicResource PrimaryColor}"
-                           IsEnabled="{Binding IsBusy}"/>
+                           IsEnabled="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"/>
 
         <maps:Map x:Name="map" 
                   Grid.Row="0"
-                  InitialCameraUpdate="18.472384,-69.921611,18"
                   PinClicked="Map_PinClicked"
+                  InitialCameraUpdate="18.486057,-69.931213,18"
                   VerticalOptions="FillAndExpand" />
 
         <local:SearchHeaderView IsVisible="{Binding ShowHeaderSearch}"

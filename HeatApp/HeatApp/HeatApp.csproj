@@ -87,6 +87,7 @@
     <PackageReference Include="Xamarin.Forms.Maps" Version="4.6.0.1141" />
     <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator" Version="17.4.0.55" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -331,5 +332,9 @@
     <Folder Include="ViewModels\HeatViewModels\Menu\" />
     <Folder Include="Services\Map\" />
     <Folder Include="Interfaces\Map\" />
+    <Folder Include="ViewModels\HeatViewModels\Bus\" />
+    <Folder Include="Models\HeatModels\Review\" />
+    <Folder Include="Interfaces\Review\" />
+    <Folder Include="Services\Review\" />
   </ItemGroup>
 </Project>
