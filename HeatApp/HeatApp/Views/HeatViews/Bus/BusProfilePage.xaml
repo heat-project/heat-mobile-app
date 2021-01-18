@@ -6,7 +6,9 @@
              xmlns:controls="clr-namespace:HeatApp.Controls"
              xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" xmlns:local="clr-namespace:HeatApp.Views.HeatViews.Bus"
+             xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:local="clr-namespace:HeatApp.Views.HeatViews.Bus"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              ios:Page.UseSafeArea="True"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
@@ -17,6 +19,8 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
+
 
         <Grid Grid.Row="0"
               Grid.RowSpan="2">
@@ -249,7 +253,6 @@
                 </syncfusion:SfListView>
             </StackLayout>
         </Grid>
-
 
         <local:CommentSectionView IsVisible="{Binding ShowComments}"
                                   Grid.Row="1"

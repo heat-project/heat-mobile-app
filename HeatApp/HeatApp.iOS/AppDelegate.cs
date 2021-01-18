@@ -15,13 +15,12 @@ using Syncfusion.XForms.iOS.Buttons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using Foundation;
 using UIKit;
 using Syncfusion.XForms.iOS.Backdrop;
-using Syncfusion.SfBusyIndicator.XForms.iOS;
 using Microsoft.AppCenter.Distribute;
 using Microsoft.AppCenter;
+using Syncfusion.SfBusyIndicator.XForms.iOS;
 
 namespace HeatApp.iOS
 {
@@ -62,6 +61,7 @@ namespace HeatApp.iOS
             Rg.Plugins.Popup.Popup.Init();
             AppCenter.Start("c55cf46b-3908-4073-925e-adbe7c9f4810", typeof(Distribute));
             Distribute.DontCheckForUpdatesInDebug();
+            new SfBusyIndicatorRenderer();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

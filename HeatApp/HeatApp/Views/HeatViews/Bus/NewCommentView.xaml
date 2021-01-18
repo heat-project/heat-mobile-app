@@ -2,6 +2,7 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              x:Class="HeatApp.Views.HeatViews.Bus.NewCommentView"
              BackgroundColor="White">
 
@@ -72,6 +73,22 @@
                 </Button.Triggers>
             </Button>
         </StackLayout>
+
+        <busyindicator:SfBusyIndicator x:Name="busyindicator" 
+                                       AnimationType="Gear"  
+                                       ViewBoxWidth = "50" 
+                                       ViewBoxHeight="50" 
+                                       TextColor="{DynamicResource SecondaryColor}"
+                                       IsBusy="{Binding IsBusy}"
+                                       EnableAnimation="{Binding IsBusy}"
+                                       IsVisible="{Binding IsBusy}"
+                                       IsEnabled="{Binding IsBusy}"
+                                       Grid.Row="0"
+                                       Grid.RowSpan="4"
+                                       Title="Cargando..."
+                                       TitlePlacement="Bottom"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center"/>
     </Grid>
 
 </ContentView>

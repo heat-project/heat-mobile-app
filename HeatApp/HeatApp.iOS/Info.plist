@@ -33,7 +33,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.companyname.HeatApp</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.5</string>
 	<key>CFBundleName</key>
 	<string>HeatApp</string>
 	<key>XSAppIconAssets</key>
@@ -46,18 +46,18 @@
 	<string>Podemos utilizar su ubicación mientras utilice la aplicación?</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Podemos utilizar su ubicación?</string>
-<key>UIBackgroundModes</key>
-<array>
-	<string>location</string>
-</array>
-<key>CFBundleURLTypes</key>
-  <array>
-      <dict>
-          <key>CFBundleURLSchemes</key>
-          <array>
-              <string>appcenter-c55cf46b-3908-4073-925e-adbe7c9f4810</string>
-          </array>
-      </dict>
-  </array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>appcenter-c55cf46b-3908-4073-925e-adbe7c9f4810</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

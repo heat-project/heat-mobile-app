@@ -20,18 +20,12 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ActivityIndicator Grid.Row="0"
-                           VerticalOptions="CenterAndExpand"
-                           HorizontalOptions="CenterAndExpand"
-                           BackgroundColor="{DynamicResource PrimaryColor}"
-                           IsEnabled="{Binding IsBusy}"
-                           IsVisible="{Binding IsBusy}"/>
 
         <maps:Map x:Name="map" 
                   Grid.Row="0"
                   PinClicked="Map_PinClicked"
                   InitialCameraUpdate="18.486057,-69.931213,18"
-                  VerticalOptions="FillAndExpand" />
+                  VerticalOptions="FillAndExpand"/>
 
         <local:SearchHeaderView IsVisible="{Binding ShowHeaderSearch}"
                                 x:Name="headerSearch"
@@ -65,6 +59,12 @@
                             <Setter Property="Opacity" Value="0.5" />
                         </VisualState.Setters>
                     </VisualState>
+
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="Opacity" Value="0.4" />
+                        </VisualState.Setters>
+                    </VisualState>
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
         </buttons:SfButton>
@@ -82,7 +82,8 @@
                           CornerRadius="25" 
                           HeightRequest="50" 
                           WidthRequest="50"
-                          Command="{Binding ShowMyLocationCommand}">
+                          Command="{Binding ShowMyLocationCommand}"
+                          IsEnabled="{Binding IsNotBusy}">
 
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup x:Name="CommonStates">
@@ -95,6 +96,11 @@
                     <VisualState x:Name="Pressed">
                         <VisualState.Setters>
                             <Setter Property="Opacity" Value="0.5" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="Opacity" Value="0.4" />
                         </VisualState.Setters>
                     </VisualState>
                 </VisualStateGroup>
@@ -111,7 +117,8 @@
                               VerticalOptions="End"
                               HorizontalOptions="End" 
                               CornerRadius="25" 
-                              HeightRequest="50" 
+                              HeightRequest="50"
+                              IsEnabled="{Binding IsNotBusy}"
                               Command="{Binding GoToNearstStopCommand}">
 
             <VisualStateManager.VisualStateGroups>
@@ -137,12 +144,27 @@
                             BindingContext="{Binding BindingContext, Source={x:Reference root}}"
                             VerticalOptions="End"/>
 
+        <busyindicator:SfBusyIndicator x:Name="busyindicator" 
+                                       AnimationType="Ball"  
+                                       ViewBoxWidth = "100" 
+                                       ViewBoxHeight="100" 
+                                       TextColor="{DynamicResource PrimaryColor}"
+                                       IsBusy="{Binding IsBusy}"
+                                       EnableAnimation="{Binding IsBusy}"
+                                       IsVisible="{Binding IsBusy}"
+                                       IsEnabled="{Binding IsBusy}"
+                                       Grid.Row="0"
+                                       Title="Cargando..."
+                                       TitlePlacement="Bottom"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center"/>
         <StackLayout Grid.Row="0" 
                      Margin="0,40"
                      Spacing="15"
                      x:Name="stkEntry"
                      VerticalOptions="EndAndExpand"
                      IsVisible="{Binding ShowRoutes}">
+
 
             <border:SfBorder BorderWidth="0" 
                              HasShadow="True" 
@@ -231,5 +253,6 @@
                 </listView:SfListView.ItemTemplate>
             </listView:SfListView>
         </StackLayout>
+
     </Grid>
 </ContentPage>

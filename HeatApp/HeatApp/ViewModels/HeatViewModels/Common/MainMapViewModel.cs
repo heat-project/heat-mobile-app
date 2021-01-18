@@ -202,14 +202,28 @@ namespace HeatApp.ViewModels.Heat
 
         private async Task GoToMyLocation()
         {
-            ShowLocation = false;
-            ShowFollowRoute = false;
-            ShowHeaderSearch = false;
-            ShowRoutes = true;
-            ShowMenu = true;
-            MapService.Map.Polylines.Clear();
-            await map.MoveCamera(CameraUpdateFactory.NewPositionZoom(UserPin.Position, 18));
-
+            if (IsBusy) return;
+            try
+            {
+                StartBusy();    
+                ShowLocation = false;
+                ShowFollowRoute = false;
+                ShowHeaderSearch = false;
+                ShowRoutes = true;
+                ShowMenu = true;
+                MapService.Map.Polylines.Clear();
+                await map.MoveCamera(CameraUpdateFactory.NewPositionZoom(UserPin.Position, 18));
+                await GetStops(map);
+                await GetAllBuses();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                EndBusy();
+            }
         }
 
         private async Task ShowRoute(object obj)

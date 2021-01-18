@@ -9,12 +9,13 @@
              x:Class="HeatApp.Views.HeatViews.LoginPage"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:control="clr-namespace:HeatApp.Views.HeatViews.Controls"
-             xmlns:converter="clr-namespace:HeatApp.Converters" 
+             xmlns:converter="clr-namespace:HeatApp.Converters"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms" 
              ios:Page.UseSafeArea="true"
              NavigationPage.HasBackButton="False"
              NavigationPage.HasNavigationBar="False">
 
-        <ContentPage.Resources>
+    <ContentPage.Resources>
         <ResourceDictionary>
             <converter:InverseBoolConverter x:Key="InverseBoolConverter"/>
             <converter:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter"/>
@@ -74,7 +75,8 @@
                                                      Text="{Binding Email.Value}"                                           
                                                      FontFamily="{StaticResource FontIcons}" 
                                                      IsValid="{Binding Email.IsValid}"
-                                                     Icon="{StaticResource AvatarIcon}"/>
+                                                     Icon="{StaticResource AvatarIcon}"
+                                                     IsEnabled="{Binding IsNotBusy}"/>
 
                         <Label Text="{Binding Email.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
                                IsVisible="{Binding Email.IsValid, Converter={StaticResource InverseBoolConverter}}"
@@ -85,7 +87,8 @@
                                                      IsValid="{Binding Password.IsValid}"
                                                      IsPassword="True" 
                                                      FontFamily="{StaticResource FontIcons}" 
-                                                     Icon="{StaticResource Password}"/>
+                                                     Icon="{StaticResource Password}"
+                                                     IsEnabled="{Binding IsNotBusy}"/>
 
                         <Label Text="{Binding Password.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
                                IsVisible="{Binding Password.IsValid, Converter={StaticResource InverseBoolConverter}}"
@@ -111,6 +114,7 @@
                         <buttons:SfButton                        
                         Margin="0,16"
                         HasShadow="False"
+                        IsEnabled="{Binding IsNotBusy}"
                         Style="{StaticResource PrimaryButtonStyle}"
                         Text="INICIAR SESIÓN"
                         VerticalOptions="EndAndExpand"
@@ -147,6 +151,7 @@
                           HeightRequest="50"
                           HasShadow="False"
                           WidthRequest="50"
+                          IsEnabled="{Binding IsNotBusy}"
                           Clicked="SfButton_Clicked">
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup x:Name="CommonStates">
