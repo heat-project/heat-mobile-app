@@ -50,5 +50,14 @@
 <array>
 	<string>location</string>
 </array>
+<key>CFBundleURLTypes</key>
+  <array>
+      <dict>
+          <key>CFBundleURLSchemes</key>
+          <array>
+              <string>appcenter-c55cf46b-3908-4073-925e-adbe7c9f4810</string>
+          </array>
+      </dict>
+  </array>
 </dict>
 </plist>

@@ -11,6 +11,8 @@ using HeatApp.Views.HeatViews;
 using HeatApp.Views.HeatViews.Common;
 using HeatApp.Views.Navigation;
 using HeatApp.Views.Profile;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Distribute;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -33,6 +35,8 @@ namespace HeatApp
 
         protected override void OnStart()
         {
+            AppCenter.Start("ios=c55cf46b-3908-4073-925e-adbe7c9f4810;", typeof(Distribute));
+
         }
 
         protected override void OnSleep()

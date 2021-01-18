@@ -20,6 +20,8 @@ using Foundation;
 using UIKit;
 using Syncfusion.XForms.iOS.Backdrop;
 using Syncfusion.SfBusyIndicator.XForms.iOS;
+using Microsoft.AppCenter.Distribute;
+using Microsoft.AppCenter;
 
 namespace HeatApp.iOS
 {
@@ -58,6 +60,8 @@ namespace HeatApp.iOS
             Xamarin.FormsMaps.Init();
             Xamarin.FormsGoogleMaps.Init("AIzaSyD2ZjqBONONbEATiZT8yX97iwm2biuJI5o");
             Rg.Plugins.Popup.Popup.Init();
+            AppCenter.Start("c55cf46b-3908-4073-925e-adbe7c9f4810", typeof(Distribute));
+            Distribute.DontCheckForUpdatesInDebug();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

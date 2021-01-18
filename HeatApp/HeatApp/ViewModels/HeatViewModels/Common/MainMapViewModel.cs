@@ -586,7 +586,7 @@ namespace HeatApp.ViewModels.Heat
         #endregion
 
         #region Events
-        private async void PositionChanged(object sender, PositionEventArgs e)
+        private void PositionChanged(object sender, PositionEventArgs e)
         {
             //If updating the UI, ensure you invoke on main thread
             var position = e.Position;
@@ -594,7 +594,6 @@ namespace HeatApp.ViewModels.Heat
             CurrentLatitude = position.Latitude;
             CurrentLongitude = position.Longitude;
             SetUserPin(new Position(CurrentLatitude, CurrentLongitude));
-            await map.MoveCamera(CameraUpdateFactory.NewPositionZoom(UserPin.Position, 18));
         }
         #endregion
     }
