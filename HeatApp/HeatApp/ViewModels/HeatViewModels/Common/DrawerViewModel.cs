@@ -176,6 +176,8 @@ namespace HeatApp.ViewModels.HeatViewModels.Common
         }
         private void LogOut()
         {
+
+            Settings.Token = string.Empty;
             App.Current.MainPage = new NavigationPage(new InitialPage());
         }
         #endregion

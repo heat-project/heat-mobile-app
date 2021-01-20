@@ -35,7 +35,7 @@ namespace HeatApp
 
         protected override void OnStart()
         {
-            AppCenter.Start("ios=c55cf46b-3908-4073-925e-adbe7c9f4810;", typeof(Distribute));
+            AppCenter.Start("ios=c55cf46b-3908-4073-925e-adbe7c9f4810;android=1a96c5d2-5520-40be-9714-03c236e8b38a", typeof(Distribute));
 
         }
 
