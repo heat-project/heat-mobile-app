@@ -1,5 +1,6 @@
 ﻿using HeatApp.Helpers;
 using HeatApp.Views.HeatViews.Common;
+using HeatApp.Views.HeatViews.Help;
 using HeatApp.Views.HeatViews.Routes;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -171,6 +172,9 @@ namespace HeatApp.ViewModels.HeatViewModels.Common
                     break;
                 case "Perfil":
                     await navigation.PushModalAsync(new ConfigPage());
+                    break;
+                case "Ayuda":
+                    await navigation.PushModalAsync(new HelpPage());
                     break;
             }
         }

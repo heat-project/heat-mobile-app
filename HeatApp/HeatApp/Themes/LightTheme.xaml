@@ -6,6 +6,7 @@
     xmlns:converter="clr-namespace:HeatApp.Converters"
     xmlns:graphics="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
     xmlns:control="clr-namespace:HeatApp.Controls"
+    xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
@@ -136,7 +137,7 @@
         <Setter Property="BackgroundColor" Value="{OnIdiom Default={DynamicResource Gray-White}, Desktop={DynamicResource Gray-100}}" />
     </Style>
 
-      <!--Common style for SfSegmentedControl-->  
+    <!--Common style for SfSegmentedControl-->
     <Style x:Key="SfSegmentedControlStyle" TargetType="buttons:SfSegmentedControl">
         <Setter Property="FontSize" Value="14" />
         <Setter Property="FontFamily" Value="Montserrat-Bold" />
@@ -164,7 +165,7 @@
 
     </Style>
 
-      <!--Common style for profile border style-->  
+    <!--Common style for profile border style-->
     <Style x:Key="ProfileBorderStyle" TargetType="border:SfBorder">
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="VerticalOptions" Value="Center" />
@@ -173,7 +174,7 @@
         <Setter Property="CornerRadius" Value="20" />
     </Style>
 
-      <!--Common style for icon buttons-->  
+    <!--Common style for icon buttons-->
     <Style x:Key="IconButtonStyle" TargetType="buttons:SfButton">
         <Setter Property="TextColor" Value="{DynamicResource Gray-600}" />
         <Setter Property="BackgroundColor" Value="{StaticResource Transparent}" />
@@ -222,13 +223,13 @@
         <Setter Property="FontFamily" Value="{StaticResource FontIcons}" />
     </Style>
 
-     <!--Common style for seperators-->
+    <!--Common style for seperators-->
     <Style x:Key="SeparatorStyle" TargetType="BoxView">
         <Setter Property="HeightRequest" Value="1" />
         <Setter Property="BackgroundColor" Value="{DynamicResource Gray-200}" />
     </Style>
 
-    <!--Common style for entries-->  
+    <!--Common style for entries-->
     <Style x:Key="EntryStyle" TargetType="control:BorderlessEntry">
         <Setter Property="PlaceholderColor" Value="{StaticResource EntryPlaceholderColor}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
@@ -240,7 +241,7 @@
         <Setter Property="ReturnType" Value="Done" />
     </Style>
 
-      <!--Common style for buttons-->  
+    <!--Common style for buttons-->
     <Style x:Key="SfButtonStyle" TargetType="buttons:SfButton">
         <Setter Property="BackgroundGradient">
             <Setter.Value>
@@ -297,7 +298,7 @@
         <Setter Property="VerticalTextAlignment" Value="Center" />
     </Style>
 
-    <!--Common style for flat buttons-->  
+    <!--Common style for flat buttons-->
     <Style x:Key="SfFlatButtonStyle" TargetType="buttons:SfButton">
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
@@ -306,7 +307,7 @@
         <Setter Property="VerticalTextAlignment" Value="Center" />
     </Style>
 
-      <!--Common style for borders-->  
+    <!--Common style for borders-->
     <Style x:Key="SfBorderStyle" TargetType="border:SfBorder">
         <Setter Property="BackgroundColor" Value="{StaticResource BorderBackgroundColor}" />
         <Setter Property="BorderColor" Value="Transparent" />
@@ -314,7 +315,7 @@
         <Setter Property="BorderWidth" Value="1" />
     </Style>
 
-      <!--Common style for gradient view-->  
+    <!--Common style for gradient view-->
     <Style x:Key="SfGradientViewStyle" TargetType="graphics:SfGradientView">
         <Setter Property="Opacity" Value="0.82" />
         <Setter Property="VerticalOptions" Value="FillAndExpand" />
@@ -386,7 +387,7 @@
         <Setter Property="HeightRequest" Value="40"/>
     </Style>
 
-      <!--Common style for social icon SfButton-->  
+    <!--Common style for social icon SfButton-->
     <Style x:Key="SocialIconButtonStyle" TargetType="buttons:SfButton">
         <Setter Property="FontSize" Value="18" />
         <Setter Property="CornerRadius" Value="22" />
@@ -489,9 +490,27 @@
         <Setter Property="CornerRadius" Value="1" />
         <Setter Property="BorderWidth" Value="0"/>
     </Style>
-    
+
     <Style TargetType="Label" x:Key="ErrorTextStyle">
         <Setter Property="TextColor" Value = "{DynamicResource Red}"   />
         <Setter Property="FontSize" Value = "12"   />
+    </Style>
+
+    <!--  Style for description label  -->
+    <Style x:Key="DescriptionLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Gray-700}" />
+        <Setter Property="FontFamily" Value="{StaticResource Montserrat-Medium}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="LineHeight" Value="{OnPlatform Default=1.25}"/>
+    </Style>
+
+    <!--  Common style for SfListView  -->
+    <Style x:Key="SfListViewStyle" TargetType="listView:SfListView">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Gray-White}" />
+        <Setter Property="FocusBorderThickness" Value="0" />
+        <Setter Property="SelectionBackgroundColor" Value="Transparent" />
+        <Setter Property="IsScrollBarVisible" Value="False" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
     </Style>
 </ResourceDictionary>

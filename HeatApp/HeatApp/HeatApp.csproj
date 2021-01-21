@@ -33,6 +33,13 @@
     <None Remove="Images\WaterConsumed.svg" />
     <None Remove="Views\HeatViews\Map\MapStyle.json" />
     <None Remove="MapStyle.json" />
+    <None Remove="Images\helpRutas.png" />
+    <None Remove="Images\HelpComentarios.svg" />
+    <None Remove="Images\HelpNuevoComentario.svg" />
+    <None Remove="Images\HelpParadas.svg" />
+    <None Remove="Images\HelpReporte.svg" />
+    <None Remove="Images\HelpRutas.svg" />
+    <None Remove="Images\HelpVehiculo.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -57,6 +64,12 @@
     <EmbeddedResource Include="Images\SomethingWentWrong.svg" />
     <EmbeddedResource Include="Images\WaterConsumed.svg" />
     <EmbeddedResource Include="MapStyle.json" />
+    <EmbeddedResource Include="Images\HelpComentarios.svg" />
+    <EmbeddedResource Include="Images\HelpNuevoComentario.svg" />
+    <EmbeddedResource Include="Images\HelpParadas.svg" />
+    <EmbeddedResource Include="Images\HelpReporte.svg" />
+    <EmbeddedResource Include="Images\HelpRutas.svg" />
+    <EmbeddedResource Include="Images\HelpVehiculo.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -89,6 +102,7 @@
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.1" />
     <PackageReference Include="Microsoft.AppCenter.Distribute" Version="4.1.0" />
+    <PackageReference Include="Syncfusion.Xamarin.Expander" Version="17.4.0.55" />
   </ItemGroup>
 
   <ItemGroup>
@@ -337,5 +351,7 @@
     <Folder Include="Models\HeatModels\Review\" />
     <Folder Include="Interfaces\Review\" />
     <Folder Include="Services\Review\" />
+    <Folder Include="Views\HeatViews\Help\" />
+    <Folder Include="Models\HeatModels\Help\" />
   </ItemGroup>
 </Project>
