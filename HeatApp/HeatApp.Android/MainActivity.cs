@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -8,6 +7,7 @@ using Android.Widget;
 using Android.OS;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Distribute;
+using Plugin.CurrentActivity;
 
 namespace HeatApp.Droid
 {
