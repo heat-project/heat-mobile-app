@@ -59,8 +59,8 @@ namespace HeatApp.iOS
             Xamarin.FormsMaps.Init();
             Xamarin.FormsGoogleMaps.Init("AIzaSyD2ZjqBONONbEATiZT8yX97iwm2biuJI5o");
             Rg.Plugins.Popup.Popup.Init();
-            AppCenter.Start("c55cf46b-3908-4073-925e-adbe7c9f4810", typeof(Distribute));
             Distribute.DontCheckForUpdatesInDebug();
+            AppCenter.Start("c55cf46b-3908-4073-925e-adbe7c9f4810", typeof(Distribute));
             new SfBusyIndicatorRenderer();
             Syncfusion.XForms.iOS.Expander.SfExpanderRenderer.Init();
             LoadApplication(new App());

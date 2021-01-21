@@ -163,7 +163,7 @@
 
                                 <BoxView Grid.Row="1"
                                          HeightRequest="1"
-                                         Style="{StaticResource BoxViewStyle}" />
+                                         BackgroundColor="{DynamicResource Gray-500}"/>
 
                             </Grid>
                         </ViewCell>
