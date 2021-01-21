@@ -62,6 +62,7 @@ namespace HeatApp.iOS
             AppCenter.Start("c55cf46b-3908-4073-925e-adbe7c9f4810", typeof(Distribute));
             Distribute.DontCheckForUpdatesInDebug();
             new SfBusyIndicatorRenderer();
+            Syncfusion.XForms.iOS.Expander.SfExpanderRenderer.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
