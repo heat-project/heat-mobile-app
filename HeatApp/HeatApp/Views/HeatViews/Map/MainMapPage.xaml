@@ -168,10 +168,10 @@
 
             <border:SfBorder BorderWidth="0" 
                              HasShadow="True" 
-                             VerticalOptions="End">
+                             VerticalOptions="Fill">
 
                 <inputLayout:SfTextInputLayout
-                    Margin="16,0"
+                    Padding="20"
                             LeadingViewPosition="Inside"
                             ContainerType="Outlined"
                             ContainerBackgroundColor="White"
@@ -236,11 +236,11 @@
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
 
-                                            <Label HorizontalOptions="EndAndExpand" Grid.Row="0" Grid.Column="1" FontAttributes="Bold" TextColor="{Binding Color}" Text="{Binding Estimate}" FontSize="20"/>
-                                            <Label HorizontalOptions="EndAndExpand" Grid.Row="1" Grid.Column="1" TextColor="{Binding Color}" Text="MIN" FontFamily="{StaticResource Montserrat-Bold}" FontSize="Small"/>
+                                            <Label HorizontalOptions="EndAndExpand" Grid.Row="0" Grid.Column="1" FontAttributes="Bold" TextColor="{Binding Color}" Text="{Binding Estimate}" FontSize="12"/>
+                                            <Label HorizontalOptions="EndAndExpand" Grid.Row="1" Grid.Column="1" TextColor="{Binding Color}" Text="MIN" FontFamily="{StaticResource Montserrat-Bold}" FontSize="12"/>
 
                                             <StackLayout HorizontalOptions="StartAndExpand" Spacing="0" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0">
-                                                <Label TextColor="{DynamicResource Gray-700}" Text="{Binding Conductor}" FontFamily="{StaticResource Montserrat-Bold}" FontSize="Small"/>
+                                                <Label TextColor="{DynamicResource Gray-700}" Text="{Binding Conductor}" FontFamily="{StaticResource Montserrat-Bold}" FontSize="12"/>
                                             </StackLayout>
 
 

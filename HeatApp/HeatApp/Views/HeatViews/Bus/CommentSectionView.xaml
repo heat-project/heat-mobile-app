@@ -121,9 +121,8 @@
                                    Padding="10"
                                    Text="{Binding Text}"
                                    TextColor="{DynamicResource Gray-900}"
-                                   FontSize="14"
-                                   FontFamily="{StaticResource Montserrat-Medium}"
-                                   HeightRequest="21" />
+                                   FontSize="Micro"
+                                   FontFamily="{StaticResource Montserrat-Medium}" />
 
                                 <!-- More Button -->
                                 <buttons:SfButton Grid.Column="3"

@@ -79,6 +79,7 @@
                                             Margin="15,0"
                                             FontSize="25"
                                             FontFamily="{StaticResource Montserrat-Medium}"
+                                            BackgroundColor="Transparent"
                                             Text="{Binding Name}"
                                             Command="{Binding BindingContext.MenuItemTapCommand, Source={x:Reference rootPage}}"
                                             CommandParameter="{Binding .}"/>
@@ -91,6 +92,7 @@
                             <ViewCell>
                                 <Button TextColor="{x:StaticResource SecondaryColor}" 
                                         HorizontalOptions="StartAndExpand"
+                                            BackgroundColor="Transparent"
                                         Margin="15,0"
                                         FontSize="25"
                                         FontFamily="{StaticResource Montserrat-Medium}"

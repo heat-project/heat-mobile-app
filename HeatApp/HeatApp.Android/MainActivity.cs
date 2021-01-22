@@ -8,10 +8,11 @@ using Android.OS;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Distribute;
 using Plugin.CurrentActivity;
+using Xamarin.Forms.GoogleMaps.Android;
 
 namespace HeatApp.Droid
 {
-    [Activity(Label = "HeatApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize )]
+    [Activity(Label = "HeatApp")]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -25,7 +26,12 @@ namespace HeatApp.Droid
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
-            Xamarin.FormsGoogleMaps.Init(this, savedInstanceState);
+            Xamarin.FormsMaps.Init(this, savedInstanceState);
+            var platformConfig = new PlatformConfig
+            {
+                BitmapDescriptorFactory = new BitmapConfig()
+            };
+            Xamarin.FormsGoogleMaps.Init(this, savedInstanceState, platformConfig);
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
             AppCenter.Start("1a96c5d2-5520-40be-9714-03c236e8b38a",
                    typeof(Distribute));

@@ -30,7 +30,7 @@
         <Label Text="{StaticResource Home}" 
                HorizontalTextAlignment="Center"
                FontFamily="{StaticResource FontIcons}" 
-               FontSize="Header" 
+               FontSize="Title" 
                TextColor="Black"/>
 
         <Label FontFamily="{StaticResource Montserrat-Regular}">
@@ -52,7 +52,7 @@
         <Label Text="{StaticResource Sort}" 
                HorizontalTextAlignment="Center"
                FontFamily="{StaticResource FontIcons}" 
-               FontSize="Header" 
+               FontSize="Title" 
                TextColor="Black"/>
 
         <Label FontFamily="{StaticResource Montserrat-Regular}">

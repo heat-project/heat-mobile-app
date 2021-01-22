@@ -6,31 +6,20 @@
              NavigationPage.HasBackButton="False"
              NavigationPage.HasNavigationBar="False">
 
-    <ScrollView HorizontalOptions="Center">
-        <ScrollView.VerticalOptions>
-            <OnIdiom
-                    x:TypeArguments="LayoutOptions"
-                    Default="CenterAndExpand"
-                    Phone="FillAndExpand" />
-        </ScrollView.VerticalOptions>
+    <ScrollView HorizontalOptions="Center"
+                VerticalOptions="FillAndExpand">
 
-        <StackLayout Margin="{core:OnPlatformOrientationThickness PhonePortrait='20,32',
-                                                                  PhoneLandscape='150,32',
-                                                                  TabletPortrait='200,50',
-                                                                  TabletLandscape='300,50',
-                                                                  Desktop='30'}"
+        <StackLayout Margin="20,32"
                 Spacing="0"
-                VerticalOptions="FillAndExpand"
-                WidthRequest="{OnPlatform Default='-1',
-                                          UWP='350'}">
+                VerticalOptions="FillAndExpand">
 
             <Grid RowSpacing="0" 
                   VerticalOptions="StartAndExpand">
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <ff:CachedImage Grid.Row="0"
@@ -40,9 +29,9 @@
                                 HeightRequest="150"/>
 
                 <Label Grid.Row="1"
-                       Margin="10,40"
+                       Margin="10"
                        FontFamily="{StaticResource Montserrat-SemiBold}"
-                       FontSize="26"
+                       FontSize="22"
                        HorizontalTextAlignment="Center"
                        VerticalTextAlignment="End"
                        Style="{StaticResource LabelStyle}"

@@ -113,13 +113,13 @@
                                    HorizontalTextAlignment="Center"
                                    FontFamily="{StaticResource Montserrat-Bold}"
                                    FontAttributes="Bold"
-                                   FontSize="Header" 
+                                   FontSize="16" 
                                    TextColor="{DynamicResource Gray-800}"/>
 
                         <Label Text="Puntuación" 
                                    HorizontalTextAlignment="Center"
                                    FontFamily="{StaticResource Montserrat-Regular}"
-                                   FontSize="Header" 
+                                   FontSize="16" 
                                    TextColor="{DynamicResource Gray-800}"/>
                     </StackLayout>
                 </controls:CustomShadowFrame>
@@ -139,13 +139,13 @@
                         <Label Text="{Binding BusInfo.DateEntryConductor}" 
                                    FontFamily="{StaticResource Montserrat-Bold}"
                                    HorizontalTextAlignment="Center"
-                                   FontSize="Header" 
+                                   FontSize="16" 
                                    TextColor="{DynamicResource Gray-800}"/>
 
                         <Label Text="Se unió" 
                                    FontFamily="{StaticResource Montserrat-Regular}"
                                    HorizontalTextAlignment="Center"
-                                   FontSize="Header" 
+                                   FontSize="16" 
                                    TextColor="{DynamicResource Gray-800}"/>
                     </StackLayout>
                 </controls:CustomShadowFrame>
@@ -188,7 +188,7 @@
                                                Margin="0,13,0,0"
                                                Text="Comentarios"
                                                TextColor="{DynamicResource PrimaryColor}"
-                                               FontSize="16"
+                                               FontSize="12"
                                                FontFamily="{StaticResource Montserrat-Medium}"
                                                HeightRequest="24" />
 
@@ -198,7 +198,7 @@
                                                Margin="0,0,0,14"
                                                Text="{Binding CommentCount}"
                                                TextColor="{DynamicResource Gray-700}"
-                                               FontSize="14"
+                                               FontSize="12"
                                                FontFamily="{StaticResource Montserrat-Medium}"
                                                HeightRequest="21" />
 
@@ -240,7 +240,7 @@
                                 <Label Text="{StaticResource NewMessage}" 
                                         HorizontalTextAlignment="Start"
                                         FontFamily="{StaticResource FontIcons}" 
-                                        FontSize="Header" 
+                                        FontSize="12" 
                                         TextColor="Black"/>
 
                                 <Label FontFamily="{StaticResource Montserrat-Regular}"

@@ -30,15 +30,9 @@
 
         <ScrollView Grid.Row="0">
 
-            <StackLayout Margin="{core:OnPlatformOrientationThickness PhonePortrait='20,32',
-                                                                  PhoneLandscape='150,32',
-                                                                  TabletPortrait='200,50',
-                                                                  TabletLandscape='300,50',
-                                                                  Desktop='30'}"
+            <StackLayout Margin="20"
                     Spacing="0"
-                    VerticalOptions="FillAndExpand"
-                    WidthRequest="{OnPlatform Default='-1',
-                                              UWP='350'}">
+                    VerticalOptions="FillAndExpand">
 
                 <Grid RowSpacing="0" 
                   VerticalOptions="StartAndExpand"
@@ -52,17 +46,16 @@
                     </Grid.RowDefinitions>
 
                     <ff:CachedImage Grid.Row="0"
-                                Margin="20"
                                 Source= "logo_transparent.png"
-                                WidthRequest="180"
-                                HeightRequest="180"/>
+                                WidthRequest="150"
+                                HeightRequest="150"/>
 
                     <Label Grid.Row="1"
                        Margin="6,10"
                        TextColor="{StaticResource PrimaryColor}"
                        FontFamily="{StaticResource Montserrat-Bold}"
                        Style="{StaticResource LabelStyle}"
-                       FontSize="42"
+                       FontSize="32"
                        HorizontalTextAlignment="Start"
                        Text="Iniciar Sesión"
                        LineBreakMode="WordWrap" />
@@ -110,7 +103,7 @@
                         </Label.GestureRecognizers>
                     </Label>
 
-                    <StackLayout Grid.Row="5">
+                    <StackLayout Grid.Row="4">
                         <buttons:SfButton                        
                         Margin="0,16"
                         HasShadow="False"
