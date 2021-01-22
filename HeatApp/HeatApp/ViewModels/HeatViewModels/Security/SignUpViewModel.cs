@@ -73,7 +73,7 @@ namespace HeatApp.ViewModels
                 Password = Password.Item1.Value,
                 Email = Email.Value,
                 Name = FirstName.Value,
-                LastName = FirstName.Value,
+                LastName = LastName.Value,
                 Phone = PhoneNumber.Value,
                 Sex = "M"
             };
